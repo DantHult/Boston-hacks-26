@@ -1,0 +1,3877 @@
+{
+  "feedVersion": "Fall 2026, 2026-11-19T01:01:13+00:00, version D",
+  "platforms": [
+    {
+      "id": "place-aport:blue:0:70047",
+      "stationId": "place-aport",
+      "station": "Airport",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70047"
+      ]
+    },
+    {
+      "id": "place-aport:blue:1:70048",
+      "stationId": "place-aport",
+      "station": "Airport",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70048"
+      ]
+    },
+    {
+      "id": "place-alfcl:red:0:70061",
+      "stationId": "place-alfcl",
+      "station": "Alewife",
+      "line": "red",
+      "direction": "Red Line",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70061"
+      ]
+    },
+    {
+      "id": "place-alfcl:red:1:70061",
+      "stationId": "place-alfcl",
+      "station": "Alewife",
+      "line": "red",
+      "direction": "Arrivals at Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70061"
+      ]
+    },
+    {
+      "id": "place-alsgr:green:0:70127",
+      "stationId": "place-alsgr",
+      "station": "Allston Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70127"
+      ]
+    },
+    {
+      "id": "place-alsgr:green:1:70126",
+      "stationId": "place-alsgr",
+      "station": "Allston Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70126"
+      ]
+    },
+    {
+      "id": "place-amory:green:0:170141",
+      "stationId": "place-amory",
+      "station": "Amory Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "170141"
+      ]
+    },
+    {
+      "id": "place-amory:green:1:170140",
+      "stationId": "place-amory",
+      "station": "Amory Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "170140"
+      ]
+    },
+    {
+      "id": "place-andrw:red:0:70083",
+      "stationId": "place-andrw",
+      "station": "Andrew",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70083"
+      ]
+    },
+    {
+      "id": "place-andrw:red:1:70084",
+      "stationId": "place-andrw",
+      "station": "Andrew",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70084"
+      ]
+    },
+    {
+      "id": "place-aqucl:blue:0:70043",
+      "stationId": "place-aqucl",
+      "station": "Aquarium",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70043"
+      ]
+    },
+    {
+      "id": "place-aqucl:blue:1:70044",
+      "stationId": "place-aqucl",
+      "station": "Aquarium",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70044"
+      ]
+    },
+    {
+      "id": "place-armnl:green:0:70157",
+      "stationId": "place-armnl",
+      "station": "Arlington",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70157"
+      ]
+    },
+    {
+      "id": "place-armnl:green:1:70156",
+      "stationId": "place-armnl",
+      "station": "Arlington",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70156"
+      ]
+    },
+    {
+      "id": "place-asmnl:mattapan:0:70261",
+      "stationId": "place-asmnl",
+      "station": "Ashmont",
+      "line": "mattapan",
+      "direction": "Mattapan Line",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70261"
+      ]
+    },
+    {
+      "id": "place-asmnl:mattapan:1:70261",
+      "stationId": "place-asmnl",
+      "station": "Ashmont",
+      "line": "mattapan",
+      "direction": "Arrivals at Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70261"
+      ]
+    },
+    {
+      "id": "place-asmnl:red:0:70093",
+      "stationId": "place-asmnl",
+      "station": "Ashmont",
+      "line": "red",
+      "direction": "Arrivals at Ashmont",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70093"
+      ]
+    },
+    {
+      "id": "place-asmnl:red:1:70094",
+      "stationId": "place-asmnl",
+      "station": "Ashmont",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70094"
+      ]
+    },
+    {
+      "id": "place-astao:orange:0:70278",
+      "stationId": "place-astao",
+      "station": "Assembly",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70278"
+      ]
+    },
+    {
+      "id": "place-astao:orange:1:70279",
+      "stationId": "place-astao",
+      "station": "Assembly",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70279"
+      ]
+    },
+    {
+      "id": "place-babck:green:0:170137",
+      "stationId": "place-babck",
+      "station": "Babcock Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "170137"
+      ]
+    },
+    {
+      "id": "place-babck:green:1:170136",
+      "stationId": "place-babck",
+      "station": "Babcock Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "170136"
+      ]
+    },
+    {
+      "id": "place-bbsta:orange:0:70014",
+      "stationId": "place-bbsta",
+      "station": "Back Bay",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70014"
+      ]
+    },
+    {
+      "id": "place-bbsta:orange:1:70015",
+      "stationId": "place-bbsta",
+      "station": "Back Bay",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70015"
+      ]
+    },
+    {
+      "id": "place-bckhl:green:0:70257",
+      "stationId": "place-bckhl",
+      "station": "Back of the Hill",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70257"
+      ]
+    },
+    {
+      "id": "place-bckhl:green:1:70258",
+      "stationId": "place-bckhl",
+      "station": "Back of the Hill",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70258"
+      ]
+    },
+    {
+      "id": "place-balsq:green:0:70510",
+      "stationId": "place-balsq",
+      "station": "Ball Square",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70510"
+      ]
+    },
+    {
+      "id": "place-balsq:green:1:70509",
+      "stationId": "place-balsq",
+      "station": "Ball Square",
+      "line": "green",
+      "direction": "Medford/Tufts",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70509"
+      ]
+    },
+    {
+      "id": "place-bmmnl:blue:0:70055",
+      "stationId": "place-bmmnl",
+      "station": "Beachmont",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70055"
+      ]
+    },
+    {
+      "id": "place-bmmnl:blue:1:70056",
+      "stationId": "place-bmmnl",
+      "station": "Beachmont",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70056"
+      ]
+    },
+    {
+      "id": "place-bcnfd:green:0:70177",
+      "stationId": "place-bcnfd",
+      "station": "Beaconsfield",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70177"
+      ]
+    },
+    {
+      "id": "place-bcnfd:green:1:70176",
+      "stationId": "place-bcnfd",
+      "station": "Beaconsfield",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70176"
+      ]
+    },
+    {
+      "id": "place-bland:green:0:70149",
+      "stationId": "place-bland",
+      "station": "Blandford Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70149"
+      ]
+    },
+    {
+      "id": "place-bland:green:1:70148",
+      "stationId": "place-bland",
+      "station": "Blandford Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70148"
+      ]
+    },
+    {
+      "id": "place-lake:green:0:70107",
+      "stationId": "place-lake",
+      "station": "Boston College",
+      "line": "green",
+      "direction": "Arrivals at Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70107"
+      ]
+    },
+    {
+      "id": "place-lake:green:1:70106",
+      "stationId": "place-lake",
+      "station": "Boston College",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70106"
+      ]
+    },
+    {
+      "id": "place-bucen:green:0:70145",
+      "stationId": "place-bucen",
+      "station": "Boston University Central",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70145"
+      ]
+    },
+    {
+      "id": "place-bucen:green:1:70144",
+      "stationId": "place-bucen",
+      "station": "Boston University Central",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70144"
+      ]
+    },
+    {
+      "id": "place-buest:green:0:70147",
+      "stationId": "place-buest",
+      "station": "Boston University East",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70147"
+      ]
+    },
+    {
+      "id": "place-buest:green:1:70146",
+      "stationId": "place-buest",
+      "station": "Boston University East",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70146"
+      ]
+    },
+    {
+      "id": "place-bomnl:blue:0:70838",
+      "stationId": "place-bomnl",
+      "station": "Bowdoin",
+      "line": "blue",
+      "direction": "Arrivals at Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70838"
+      ]
+    },
+    {
+      "id": "place-bomnl:blue:1:70038",
+      "stationId": "place-bomnl",
+      "station": "Bowdoin",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70038"
+      ]
+    },
+    {
+      "id": "place-boyls:green:0:70159",
+      "stationId": "place-boyls",
+      "station": "Boylston",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70159"
+      ]
+    },
+    {
+      "id": "place-boyls:green:1:70158",
+      "stationId": "place-boyls",
+      "station": "Boylston",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70158"
+      ]
+    },
+    {
+      "id": "place-brntn:red:0:70105",
+      "stationId": "place-brntn",
+      "station": "Braintree",
+      "line": "red",
+      "direction": "Arrivals at Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70105"
+      ]
+    },
+    {
+      "id": "place-brntn:red:1:70105",
+      "stationId": "place-brntn",
+      "station": "Braintree",
+      "line": "red",
+      "direction": "Red Line",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70105"
+      ]
+    },
+    {
+      "id": "place-bndhl:green:0:70225",
+      "stationId": "place-bndhl",
+      "station": "Brandon Hall",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70225"
+      ]
+    },
+    {
+      "id": "place-bndhl:green:1:70226",
+      "stationId": "place-bndhl",
+      "station": "Brandon Hall",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70226"
+      ]
+    },
+    {
+      "id": "place-brmnl:green:0:70249",
+      "stationId": "place-brmnl",
+      "station": "Brigham Circle",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70249"
+      ]
+    },
+    {
+      "id": "place-brmnl:green:1:70250",
+      "stationId": "place-brmnl",
+      "station": "Brigham Circle",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70250"
+      ]
+    },
+    {
+      "id": "place-brdwy:red:0:70081",
+      "stationId": "place-brdwy",
+      "station": "Broadway",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70081"
+      ]
+    },
+    {
+      "id": "place-brdwy:red:1:70082",
+      "stationId": "place-brdwy",
+      "station": "Broadway",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70082"
+      ]
+    },
+    {
+      "id": "place-brkhl:green:0:70179",
+      "stationId": "place-brkhl",
+      "station": "Brookline Hills",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70179"
+      ]
+    },
+    {
+      "id": "place-brkhl:green:1:70178",
+      "stationId": "place-brkhl",
+      "station": "Brookline Hills",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70178"
+      ]
+    },
+    {
+      "id": "place-bvmnl:green:0:70181",
+      "stationId": "place-bvmnl",
+      "station": "Brookline Village",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70181"
+      ]
+    },
+    {
+      "id": "place-bvmnl:green:1:70180",
+      "stationId": "place-bvmnl",
+      "station": "Brookline Village",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70180"
+      ]
+    },
+    {
+      "id": "place-butlr:mattapan:0:70265",
+      "stationId": "place-butlr",
+      "station": "Butler",
+      "line": "mattapan",
+      "direction": "Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70265"
+      ]
+    },
+    {
+      "id": "place-butlr:mattapan:1:70266",
+      "stationId": "place-butlr",
+      "station": "Butler",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70266"
+      ]
+    },
+    {
+      "id": "place-capst:mattapan:0:70273",
+      "stationId": "place-capst",
+      "station": "Capen Street",
+      "line": "mattapan",
+      "direction": "Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70273"
+      ]
+    },
+    {
+      "id": "place-capst:mattapan:1:70274",
+      "stationId": "place-capst",
+      "station": "Capen Street",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70274"
+      ]
+    },
+    {
+      "id": "place-cedgr:mattapan:0:70263",
+      "stationId": "place-cedgr",
+      "station": "Cedar Grove",
+      "line": "mattapan",
+      "direction": "Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70263"
+      ]
+    },
+    {
+      "id": "place-cedgr:mattapan:1:70264",
+      "stationId": "place-cedgr",
+      "station": "Cedar Grove",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70264"
+      ]
+    },
+    {
+      "id": "place-cntsq:red:0:70069",
+      "stationId": "place-cntsq",
+      "station": "Central",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70069"
+      ]
+    },
+    {
+      "id": "place-cntsq:red:1:70070",
+      "stationId": "place-cntsq",
+      "station": "Central",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70070"
+      ]
+    },
+    {
+      "id": "place-cenav:mattapan:0:70269",
+      "stationId": "place-cenav",
+      "station": "Central Avenue",
+      "line": "mattapan",
+      "direction": "Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70269"
+      ]
+    },
+    {
+      "id": "place-cenav:mattapan:1:70270",
+      "stationId": "place-cenav",
+      "station": "Central Avenue",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70270"
+      ]
+    },
+    {
+      "id": "place-chmnl:red:0:70073",
+      "stationId": "place-chmnl",
+      "station": "Charles/MGH",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70073"
+      ]
+    },
+    {
+      "id": "place-chmnl:red:1:70074",
+      "stationId": "place-chmnl",
+      "station": "Charles/MGH",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70074"
+      ]
+    },
+    {
+      "id": "place-chhil:green:0:70173",
+      "stationId": "place-chhil",
+      "station": "Chestnut Hill",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70173"
+      ]
+    },
+    {
+      "id": "place-chhil:green:1:70172",
+      "stationId": "place-chhil",
+      "station": "Chestnut Hill",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70172"
+      ]
+    },
+    {
+      "id": "place-chill:green:0:70113",
+      "stationId": "place-chill",
+      "station": "Chestnut Hill Avenue",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70113"
+      ]
+    },
+    {
+      "id": "place-chill:green:1:70112",
+      "stationId": "place-chill",
+      "station": "Chestnut Hill Avenue",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70112"
+      ]
+    },
+    {
+      "id": "place-chncl:orange:0:70018",
+      "stationId": "place-chncl",
+      "station": "Chinatown",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70018"
+      ]
+    },
+    {
+      "id": "place-chncl:orange:1:70019",
+      "stationId": "place-chncl",
+      "station": "Chinatown",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70019"
+      ]
+    },
+    {
+      "id": "place-chswk:green:0:70115",
+      "stationId": "place-chswk",
+      "station": "Chiswick Road",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70115"
+      ]
+    },
+    {
+      "id": "place-chswk:green:1:70114",
+      "stationId": "place-chswk",
+      "station": "Chiswick Road",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70114"
+      ]
+    },
+    {
+      "id": "place-clmnl:green:0:70237",
+      "stationId": "place-clmnl",
+      "station": "Cleveland Circle",
+      "line": "green",
+      "direction": "Arrivals at Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70237"
+      ]
+    },
+    {
+      "id": "place-clmnl:green:1:70238",
+      "stationId": "place-clmnl",
+      "station": "Cleveland Circle",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70238"
+      ]
+    },
+    {
+      "id": "place-ccmnl:orange:0:70028",
+      "stationId": "place-ccmnl",
+      "station": "Community College",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70028"
+      ]
+    },
+    {
+      "id": "place-ccmnl:orange:1:70029",
+      "stationId": "place-ccmnl",
+      "station": "Community College",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70029"
+      ]
+    },
+    {
+      "id": "place-cool:green:0:70219",
+      "stationId": "place-cool",
+      "station": "Coolidge Corner",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70219"
+      ]
+    },
+    {
+      "id": "place-cool:green:1:70220",
+      "stationId": "place-cool",
+      "station": "Coolidge Corner",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70220"
+      ]
+    },
+    {
+      "id": "place-coecl:green:0:70155",
+      "stationId": "place-coecl",
+      "station": "Copley",
+      "line": "green",
+      "direction": "Kenmore & West, Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70155"
+      ]
+    },
+    {
+      "id": "place-coecl:green:1:70154",
+      "stationId": "place-coecl",
+      "station": "Copley",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70154"
+      ]
+    },
+    {
+      "id": "place-davis:red:0:70063",
+      "stationId": "place-davis",
+      "station": "Davis",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70063"
+      ]
+    },
+    {
+      "id": "place-davis:red:1:70064",
+      "stationId": "place-davis",
+      "station": "Davis",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70064"
+      ]
+    },
+    {
+      "id": "place-denrd:green:0:70233",
+      "stationId": "place-denrd",
+      "station": "Dean Road",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70233"
+      ]
+    },
+    {
+      "id": "place-denrd:green:1:70234",
+      "stationId": "place-denrd",
+      "station": "Dean Road",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70234"
+      ]
+    },
+    {
+      "id": "orange-forest-hills",
+      "stationId": "place-dwnxg",
+      "station": "Downtown Crossing",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70020"
+      ]
+    },
+    {
+      "id": "place-dwnxg:orange:1:70021",
+      "stationId": "place-dwnxg",
+      "station": "Downtown Crossing",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70021"
+      ]
+    },
+    {
+      "id": "red-ashmont",
+      "stationId": "place-dwnxg",
+      "station": "Downtown Crossing",
+      "line": "red",
+      "direction": "Ashmont / Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70077"
+      ]
+    },
+    {
+      "id": "place-dwnxg:red:1:70078",
+      "stationId": "place-dwnxg",
+      "station": "Downtown Crossing",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70078"
+      ]
+    },
+    {
+      "id": "place-esomr:green:0:70514",
+      "stationId": "place-esomr",
+      "station": "East Somerville",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70514"
+      ]
+    },
+    {
+      "id": "place-esomr:green:1:70513",
+      "stationId": "place-esomr",
+      "station": "East Somerville",
+      "line": "green",
+      "direction": "Medford/Tufts",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70513"
+      ]
+    },
+    {
+      "id": "place-eliot:green:0:70167",
+      "stationId": "place-eliot",
+      "station": "Eliot",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70167"
+      ]
+    },
+    {
+      "id": "place-eliot:green:1:70166",
+      "stationId": "place-eliot",
+      "station": "Eliot",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70166"
+      ]
+    },
+    {
+      "id": "place-engav:green:0:70235",
+      "stationId": "place-engav",
+      "station": "Englewood Avenue",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70235"
+      ]
+    },
+    {
+      "id": "place-engav:green:1:70236",
+      "stationId": "place-engav",
+      "station": "Englewood Avenue",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70236"
+      ]
+    },
+    {
+      "id": "place-fbkst:green:0:70227",
+      "stationId": "place-fbkst",
+      "station": "Fairbanks Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70227"
+      ]
+    },
+    {
+      "id": "place-fbkst:green:1:70228",
+      "stationId": "place-fbkst",
+      "station": "Fairbanks Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70228"
+      ]
+    },
+    {
+      "id": "place-fenwy:green:0:70187",
+      "stationId": "place-fenwy",
+      "station": "Fenway",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70187"
+      ]
+    },
+    {
+      "id": "place-fenwy:green:1:70186",
+      "stationId": "place-fenwy",
+      "station": "Fenway",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70186"
+      ]
+    },
+    {
+      "id": "place-fenwd:green:0:70251",
+      "stationId": "place-fenwd",
+      "station": "Fenwood Road",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70251"
+      ]
+    },
+    {
+      "id": "place-fenwd:green:1:70252",
+      "stationId": "place-fenwd",
+      "station": "Fenwood Road",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70252"
+      ]
+    },
+    {
+      "id": "place-fldcr:red:0:70089",
+      "stationId": "place-fldcr",
+      "station": "Fields Corner",
+      "line": "red",
+      "direction": "Ashmont",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70089"
+      ]
+    },
+    {
+      "id": "place-fldcr:red:1:70090",
+      "stationId": "place-fldcr",
+      "station": "Fields Corner",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70090"
+      ]
+    },
+    {
+      "id": "place-forhl:orange:0:70001",
+      "stationId": "place-forhl",
+      "station": "Forest Hills",
+      "line": "orange",
+      "direction": "Arrivals at Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70001"
+      ]
+    },
+    {
+      "id": "place-forhl:orange:1:70001",
+      "stationId": "place-forhl",
+      "station": "Forest Hills",
+      "line": "orange",
+      "direction": "Orange Line",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70001"
+      ]
+    },
+    {
+      "id": "place-gilmn:green:0:70506",
+      "stationId": "place-gilmn",
+      "station": "Gilman Square",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70506"
+      ]
+    },
+    {
+      "id": "place-gilmn:green:1:70505",
+      "stationId": "place-gilmn",
+      "station": "Gilman Square",
+      "line": "green",
+      "direction": "Medford/Tufts",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70505"
+      ]
+    },
+    {
+      "id": "place-gover:blue:0:70039",
+      "stationId": "place-gover",
+      "station": "Government Center",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70039"
+      ]
+    },
+    {
+      "id": "place-gover:blue:1:70040",
+      "stationId": "place-gover",
+      "station": "Government Center",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70040"
+      ]
+    },
+    {
+      "id": "place-gover:green:0:70202",
+      "stationId": "place-gover",
+      "station": "Government Center",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70202"
+      ]
+    },
+    {
+      "id": "place-gover:green:1:70201",
+      "stationId": "place-gover",
+      "station": "Government Center",
+      "line": "green",
+      "direction": "North Station & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70201"
+      ]
+    },
+    {
+      "id": "place-grnst:orange:0:70002",
+      "stationId": "place-grnst",
+      "station": "Green Street",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70002"
+      ]
+    },
+    {
+      "id": "place-grnst:orange:1:70003",
+      "stationId": "place-grnst",
+      "station": "Green Street",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70003"
+      ]
+    },
+    {
+      "id": "place-grigg:green:0:70129",
+      "stationId": "place-grigg",
+      "station": "Griggs Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70129"
+      ]
+    },
+    {
+      "id": "place-grigg:green:1:70128",
+      "stationId": "place-grigg",
+      "station": "Griggs Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70128"
+      ]
+    },
+    {
+      "id": "place-harsq:red:0:70067",
+      "stationId": "place-harsq",
+      "station": "Harvard",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70067"
+      ]
+    },
+    {
+      "id": "place-harsq:red:1:70068",
+      "stationId": "place-harsq",
+      "station": "Harvard",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70068"
+      ]
+    },
+    {
+      "id": "place-harvd:green:0:70131",
+      "stationId": "place-harvd",
+      "station": "Harvard Avenue",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70131"
+      ]
+    },
+    {
+      "id": "place-harvd:green:1:70130",
+      "stationId": "place-harvd",
+      "station": "Harvard Avenue",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70130"
+      ]
+    },
+    {
+      "id": "place-hwsst:green:0:70213",
+      "stationId": "place-hwsst",
+      "station": "Hawes Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70213"
+      ]
+    },
+    {
+      "id": "place-hwsst:green:1:70214",
+      "stationId": "place-hwsst",
+      "station": "Hawes Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70214"
+      ]
+    },
+    {
+      "id": "place-haecl:green:0:70204",
+      "stationId": "place-haecl",
+      "station": "Haymarket",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70204"
+      ]
+    },
+    {
+      "id": "place-haecl:green:1:70203",
+      "stationId": "place-haecl",
+      "station": "Haymarket",
+      "line": "green",
+      "direction": "North Station & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70203"
+      ]
+    },
+    {
+      "id": "place-haecl:orange:0:70024",
+      "stationId": "place-haecl",
+      "station": "Haymarket",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70024"
+      ]
+    },
+    {
+      "id": "place-haecl:orange:1:70025",
+      "stationId": "place-haecl",
+      "station": "Haymarket",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70025"
+      ]
+    },
+    {
+      "id": "place-hsmnl:green:0:70260",
+      "stationId": "place-hsmnl",
+      "station": "Heath Street",
+      "line": "green",
+      "direction": "Arrivals at Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70260"
+      ]
+    },
+    {
+      "id": "place-hsmnl:green:1:70260",
+      "stationId": "place-hsmnl",
+      "station": "Heath Street",
+      "line": "green",
+      "direction": "Green Line",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70260"
+      ]
+    },
+    {
+      "id": "place-hymnl:green:0:70153",
+      "stationId": "place-hymnl",
+      "station": "Hynes Convention Center",
+      "line": "green",
+      "direction": "Kenmore & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D"
+      ],
+      "stopIds": [
+        "70153"
+      ]
+    },
+    {
+      "id": "place-hymnl:green:1:70152",
+      "stationId": "place-hymnl",
+      "station": "Hynes Convention Center",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D"
+      ],
+      "stopIds": [
+        "70152"
+      ]
+    },
+    {
+      "id": "place-jaksn:orange:0:70006",
+      "stationId": "place-jaksn",
+      "station": "Jackson Square",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70006"
+      ]
+    },
+    {
+      "id": "place-jaksn:orange:1:70007",
+      "stationId": "place-jaksn",
+      "station": "Jackson Square",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70007"
+      ]
+    },
+    {
+      "id": "place-jfk:red:0:70085",
+      "stationId": "place-jfk",
+      "station": "JFK/UMass",
+      "line": "red",
+      "direction": "Ashmont",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70085"
+      ]
+    },
+    {
+      "id": "place-jfk:red:0:70095",
+      "stationId": "place-jfk",
+      "station": "JFK/UMass",
+      "line": "red",
+      "direction": "Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70095"
+      ]
+    },
+    {
+      "id": "place-jfk:red:1:70086",
+      "stationId": "place-jfk",
+      "station": "JFK/UMass",
+      "line": "red",
+      "direction": "Alewife (from Ashmont)",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70086"
+      ]
+    },
+    {
+      "id": "place-jfk:red:1:70096",
+      "stationId": "place-jfk",
+      "station": "JFK/UMass",
+      "line": "red",
+      "direction": "Alewife (from Braintree)",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70096"
+      ]
+    },
+    {
+      "id": "place-knncl:red:0:70071",
+      "stationId": "place-knncl",
+      "station": "Kendall/MIT",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70071"
+      ]
+    },
+    {
+      "id": "place-knncl:red:1:70072",
+      "stationId": "place-knncl",
+      "station": "Kendall/MIT",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70072"
+      ]
+    },
+    {
+      "id": "place-kencl:green:0:70151",
+      "stationId": "place-kencl",
+      "station": "Kenmore",
+      "line": "green",
+      "direction": "Cleveland Circle, Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-C",
+        "Green-D"
+      ],
+      "stopIds": [
+        "70151"
+      ]
+    },
+    {
+      "id": "place-kencl:green:0:71151",
+      "stationId": "place-kencl",
+      "station": "Kenmore",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "71151"
+      ]
+    },
+    {
+      "id": "place-kencl:green:1:70150",
+      "stationId": "place-kencl",
+      "station": "Kenmore",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C",
+        "Green-D"
+      ],
+      "stopIds": [
+        "70150"
+      ]
+    },
+    {
+      "id": "place-kencl:green:1:71150",
+      "stationId": "place-kencl",
+      "station": "Kenmore",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "71150"
+      ]
+    },
+    {
+      "id": "place-kntst:green:0:70215",
+      "stationId": "place-kntst",
+      "station": "Kent Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70215"
+      ]
+    },
+    {
+      "id": "place-kntst:green:1:70216",
+      "stationId": "place-kntst",
+      "station": "Kent Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70216"
+      ]
+    },
+    {
+      "id": "place-lech:green:0:70502",
+      "stationId": "place-lech",
+      "station": "Lechmere",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70502"
+      ]
+    },
+    {
+      "id": "place-lech:green:1:70501",
+      "stationId": "place-lech",
+      "station": "Lechmere",
+      "line": "green",
+      "direction": "Union Square, Medford/Tufts",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70501"
+      ]
+    },
+    {
+      "id": "place-longw:green:0:70183",
+      "stationId": "place-longw",
+      "station": "Longwood",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70183"
+      ]
+    },
+    {
+      "id": "place-longw:green:1:70182",
+      "stationId": "place-longw",
+      "station": "Longwood",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70182"
+      ]
+    },
+    {
+      "id": "place-lngmd:green:0:70247",
+      "stationId": "place-lngmd",
+      "station": "Longwood Medical Area",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70247"
+      ]
+    },
+    {
+      "id": "place-lngmd:green:1:70248",
+      "stationId": "place-lngmd",
+      "station": "Longwood Medical Area",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70248"
+      ]
+    },
+    {
+      "id": "place-mgngl:green:0:70508",
+      "stationId": "place-mgngl",
+      "station": "Magoun Square",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70508"
+      ]
+    },
+    {
+      "id": "place-mgngl:green:1:70507",
+      "stationId": "place-mgngl",
+      "station": "Magoun Square",
+      "line": "green",
+      "direction": "Medford/Tufts",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70507"
+      ]
+    },
+    {
+      "id": "place-mlmnl:orange:0:70034",
+      "stationId": "place-mlmnl",
+      "station": "Malden Center",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70034"
+      ]
+    },
+    {
+      "id": "place-mlmnl:orange:1:70035",
+      "stationId": "place-mlmnl",
+      "station": "Malden Center",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70035"
+      ]
+    },
+    {
+      "id": "place-masta:orange:0:70012",
+      "stationId": "place-masta",
+      "station": "Massachusetts Avenue",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70012"
+      ]
+    },
+    {
+      "id": "place-masta:orange:1:70013",
+      "stationId": "place-masta",
+      "station": "Massachusetts Avenue",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70013"
+      ]
+    },
+    {
+      "id": "place-matt:mattapan:0:70275",
+      "stationId": "place-matt",
+      "station": "Mattapan",
+      "line": "mattapan",
+      "direction": "Arrivals at Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70275"
+      ]
+    },
+    {
+      "id": "place-matt:mattapan:1:70276",
+      "stationId": "place-matt",
+      "station": "Mattapan",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70276"
+      ]
+    },
+    {
+      "id": "place-mvbcl:blue:0:70045",
+      "stationId": "place-mvbcl",
+      "station": "Maverick",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70045"
+      ]
+    },
+    {
+      "id": "place-mvbcl:blue:1:70046",
+      "stationId": "place-mvbcl",
+      "station": "Maverick",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70046"
+      ]
+    },
+    {
+      "id": "place-mdftf:green:0:70512",
+      "stationId": "place-mdftf",
+      "station": "Medford/Tufts",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70512"
+      ]
+    },
+    {
+      "id": "place-mdftf:green:1:70511",
+      "stationId": "place-mdftf",
+      "station": "Medford/Tufts",
+      "line": "green",
+      "direction": "Arrivals at Medford/Tufts",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70511"
+      ]
+    },
+    {
+      "id": "place-miltt:mattapan:0:70267",
+      "stationId": "place-miltt",
+      "station": "Milton",
+      "line": "mattapan",
+      "direction": "Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70267"
+      ]
+    },
+    {
+      "id": "place-miltt:mattapan:1:70268",
+      "stationId": "place-miltt",
+      "station": "Milton",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70268"
+      ]
+    },
+    {
+      "id": "place-mispk:green:0:70253",
+      "stationId": "place-mispk",
+      "station": "Mission Park",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70253"
+      ]
+    },
+    {
+      "id": "place-mispk:green:1:70254",
+      "stationId": "place-mispk",
+      "station": "Mission Park",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70254"
+      ]
+    },
+    {
+      "id": "place-mfa:green:0:70245",
+      "stationId": "place-mfa",
+      "station": "Museum of Fine Arts",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70245"
+      ]
+    },
+    {
+      "id": "place-mfa:green:1:70246",
+      "stationId": "place-mfa",
+      "station": "Museum of Fine Arts",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70246"
+      ]
+    },
+    {
+      "id": "place-newto:green:0:70171",
+      "stationId": "place-newto",
+      "station": "Newton Centre",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70171"
+      ]
+    },
+    {
+      "id": "place-newto:green:1:70170",
+      "stationId": "place-newto",
+      "station": "Newton Centre",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70170"
+      ]
+    },
+    {
+      "id": "place-newtn:green:0:70169",
+      "stationId": "place-newtn",
+      "station": "Newton Highlands",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70169"
+      ]
+    },
+    {
+      "id": "place-newtn:green:1:70168",
+      "stationId": "place-newtn",
+      "station": "Newton Highlands",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70168"
+      ]
+    },
+    {
+      "id": "place-nqncy:red:0:70097",
+      "stationId": "place-nqncy",
+      "station": "North Quincy",
+      "line": "red",
+      "direction": "Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70097"
+      ]
+    },
+    {
+      "id": "place-nqncy:red:1:70098",
+      "stationId": "place-nqncy",
+      "station": "North Quincy",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70098"
+      ]
+    },
+    {
+      "id": "place-north:green:0:70206",
+      "stationId": "place-north",
+      "station": "North Station",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70206"
+      ]
+    },
+    {
+      "id": "place-north:green:1:70205",
+      "stationId": "place-north",
+      "station": "North Station",
+      "line": "green",
+      "direction": "Lechmere & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70205"
+      ]
+    },
+    {
+      "id": "place-north:orange:0:70026",
+      "stationId": "place-north",
+      "station": "North Station",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70026"
+      ]
+    },
+    {
+      "id": "place-north:orange:1:70027",
+      "stationId": "place-north",
+      "station": "North Station",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70027"
+      ]
+    },
+    {
+      "id": "place-nuniv:green:0:70243",
+      "stationId": "place-nuniv",
+      "station": "Northeastern University",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70243"
+      ]
+    },
+    {
+      "id": "place-nuniv:green:1:70244",
+      "stationId": "place-nuniv",
+      "station": "Northeastern University",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70244"
+      ]
+    },
+    {
+      "id": "place-ogmnl:orange:0:70036",
+      "stationId": "place-ogmnl",
+      "station": "Oak Grove",
+      "line": "orange",
+      "direction": "Orange Line",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70036"
+      ]
+    },
+    {
+      "id": "place-ogmnl:orange:1:70036",
+      "stationId": "place-ogmnl",
+      "station": "Oak Grove",
+      "line": "orange",
+      "direction": "Arrivals at Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70036"
+      ]
+    },
+    {
+      "id": "place-orhte:blue:0:70051",
+      "stationId": "place-orhte",
+      "station": "Orient Heights",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70051"
+      ]
+    },
+    {
+      "id": "place-orhte:blue:1:70052",
+      "stationId": "place-orhte",
+      "station": "Orient Heights",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70052"
+      ]
+    },
+    {
+      "id": "place-brico:green:0:70135",
+      "stationId": "place-brico",
+      "station": "Packard's Corner",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70135"
+      ]
+    },
+    {
+      "id": "place-brico:green:1:70134",
+      "stationId": "place-brico",
+      "station": "Packard's Corner",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70134"
+      ]
+    },
+    {
+      "id": "place-pktrm:green:0:70196",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70196"
+      ]
+    },
+    {
+      "id": "place-pktrm:green:0:70197",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70197"
+      ]
+    },
+    {
+      "id": "place-pktrm:green:0:70198",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70198"
+      ]
+    },
+    {
+      "id": "place-pktrm:green:0:70199",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70199"
+      ]
+    },
+    {
+      "id": "place-pktrm:green:1:70200",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "green",
+      "direction": "Government Center & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70200"
+      ]
+    },
+    {
+      "id": "place-pktrm:red:0:70075",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70075"
+      ]
+    },
+    {
+      "id": "place-pktrm:red:1:70076",
+      "stationId": "place-pktrm",
+      "station": "Park Street",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70076"
+      ]
+    },
+    {
+      "id": "place-portr:red:0:70065",
+      "stationId": "place-portr",
+      "station": "Porter",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70065"
+      ]
+    },
+    {
+      "id": "place-portr:red:1:70066",
+      "stationId": "place-portr",
+      "station": "Porter",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70066"
+      ]
+    },
+    {
+      "id": "place-prmnl:green:0:70239",
+      "stationId": "place-prmnl",
+      "station": "Prudential",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70239"
+      ]
+    },
+    {
+      "id": "place-prmnl:green:1:70240",
+      "stationId": "place-prmnl",
+      "station": "Prudential",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70240"
+      ]
+    },
+    {
+      "id": "place-qamnl:red:0:70103",
+      "stationId": "place-qamnl",
+      "station": "Quincy Adams",
+      "line": "red",
+      "direction": "Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70103"
+      ]
+    },
+    {
+      "id": "place-qamnl:red:1:70104",
+      "stationId": "place-qamnl",
+      "station": "Quincy Adams",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70104"
+      ]
+    },
+    {
+      "id": "place-qnctr:red:0:70101",
+      "stationId": "place-qnctr",
+      "station": "Quincy Center",
+      "line": "red",
+      "direction": "Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70101"
+      ]
+    },
+    {
+      "id": "place-qnctr:red:1:70102",
+      "stationId": "place-qnctr",
+      "station": "Quincy Center",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70102"
+      ]
+    },
+    {
+      "id": "place-rsmnl:green:0:70175",
+      "stationId": "place-rsmnl",
+      "station": "Reservoir",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70175"
+      ]
+    },
+    {
+      "id": "place-rsmnl:green:1:70174",
+      "stationId": "place-rsmnl",
+      "station": "Reservoir",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70174"
+      ]
+    },
+    {
+      "id": "place-rbmnl:blue:0:70057",
+      "stationId": "place-rbmnl",
+      "station": "Revere Beach",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70057"
+      ]
+    },
+    {
+      "id": "place-rbmnl:blue:1:70058",
+      "stationId": "place-rbmnl",
+      "station": "Revere Beach",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70058"
+      ]
+    },
+    {
+      "id": "place-river:green:0:70161",
+      "stationId": "place-river",
+      "station": "Riverside",
+      "line": "green",
+      "direction": "Arrivals at Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70161"
+      ]
+    },
+    {
+      "id": "place-river:green:1:70160",
+      "stationId": "place-river",
+      "station": "Riverside",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70160"
+      ]
+    },
+    {
+      "id": "place-rvrwy:green:0:70255",
+      "stationId": "place-rvrwy",
+      "station": "Riverway",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70255"
+      ]
+    },
+    {
+      "id": "place-rvrwy:green:1:70256",
+      "stationId": "place-rvrwy",
+      "station": "Riverway",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70256"
+      ]
+    },
+    {
+      "id": "place-rcmnl:orange:0:70008",
+      "stationId": "place-rcmnl",
+      "station": "Roxbury Crossing",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70008"
+      ]
+    },
+    {
+      "id": "place-rcmnl:orange:1:70009",
+      "stationId": "place-rcmnl",
+      "station": "Roxbury Crossing",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70009"
+      ]
+    },
+    {
+      "id": "place-rugg:orange:0:70010",
+      "stationId": "place-rugg",
+      "station": "Ruggles",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70010"
+      ]
+    },
+    {
+      "id": "place-rugg:orange:1:70011",
+      "stationId": "place-rugg",
+      "station": "Ruggles",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70011"
+      ]
+    },
+    {
+      "id": "place-smary:green:0:70211",
+      "stationId": "place-smary",
+      "station": "Saint Mary's Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70211"
+      ]
+    },
+    {
+      "id": "place-smary:green:1:70212",
+      "stationId": "place-smary",
+      "station": "Saint Mary's Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70212"
+      ]
+    },
+    {
+      "id": "place-stpul:green:0:70217",
+      "stationId": "place-stpul",
+      "station": "Saint Paul Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70217"
+      ]
+    },
+    {
+      "id": "place-stpul:green:1:70218",
+      "stationId": "place-stpul",
+      "station": "Saint Paul Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70218"
+      ]
+    },
+    {
+      "id": "place-shmnl:red:0:70087",
+      "stationId": "place-shmnl",
+      "station": "Savin Hill",
+      "line": "red",
+      "direction": "Ashmont",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70087"
+      ]
+    },
+    {
+      "id": "place-shmnl:red:1:70088",
+      "stationId": "place-shmnl",
+      "station": "Savin Hill",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70088"
+      ]
+    },
+    {
+      "id": "place-spmnl:green:0:70208",
+      "stationId": "place-spmnl",
+      "station": "Science Park/West End",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70208"
+      ]
+    },
+    {
+      "id": "place-spmnl:green:1:70207",
+      "stationId": "place-spmnl",
+      "station": "Science Park/West End",
+      "line": "green",
+      "direction": "Lechmere & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B",
+        "Green-C",
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70207"
+      ]
+    },
+    {
+      "id": "place-smmnl:red:0:70091",
+      "stationId": "place-smmnl",
+      "station": "Shawmut",
+      "line": "red",
+      "direction": "Ashmont",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70091"
+      ]
+    },
+    {
+      "id": "place-smmnl:red:1:70092",
+      "stationId": "place-smmnl",
+      "station": "Shawmut",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70092"
+      ]
+    },
+    {
+      "id": "place-sstat:red:0:70079",
+      "stationId": "place-sstat",
+      "station": "South Station",
+      "line": "red",
+      "direction": "Ashmont/Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70079"
+      ]
+    },
+    {
+      "id": "place-sstat:red:1:70080",
+      "stationId": "place-sstat",
+      "station": "South Station",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70080"
+      ]
+    },
+    {
+      "id": "place-sougr:green:0:70111",
+      "stationId": "place-sougr",
+      "station": "South Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70111"
+      ]
+    },
+    {
+      "id": "place-sougr:green:1:70110",
+      "stationId": "place-sougr",
+      "station": "South Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70110"
+      ]
+    },
+    {
+      "id": "place-state:blue:0:70041",
+      "stationId": "place-state",
+      "station": "State",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70041"
+      ]
+    },
+    {
+      "id": "place-state:blue:1:70042",
+      "stationId": "place-state",
+      "station": "State",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70042"
+      ]
+    },
+    {
+      "id": "place-state:orange:0:70022",
+      "stationId": "place-state",
+      "station": "State",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70022"
+      ]
+    },
+    {
+      "id": "place-state:orange:1:70023",
+      "stationId": "place-state",
+      "station": "State",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70023"
+      ]
+    },
+    {
+      "id": "place-sbmnl:orange:0:70004",
+      "stationId": "place-sbmnl",
+      "station": "Stony Brook",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70004"
+      ]
+    },
+    {
+      "id": "place-sbmnl:orange:1:70005",
+      "stationId": "place-sbmnl",
+      "station": "Stony Brook",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70005"
+      ]
+    },
+    {
+      "id": "place-sdmnl:blue:0:70053",
+      "stationId": "place-sdmnl",
+      "station": "Suffolk Downs",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70053"
+      ]
+    },
+    {
+      "id": "place-sdmnl:blue:1:70054",
+      "stationId": "place-sdmnl",
+      "station": "Suffolk Downs",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70054"
+      ]
+    },
+    {
+      "id": "place-sull:orange:0:70030",
+      "stationId": "place-sull",
+      "station": "Sullivan Square",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70030"
+      ]
+    },
+    {
+      "id": "place-sull:orange:1:70031",
+      "stationId": "place-sull",
+      "station": "Sullivan Square",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70031"
+      ]
+    },
+    {
+      "id": "place-sumav:green:0:70223",
+      "stationId": "place-sumav",
+      "station": "Summit Avenue",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70223"
+      ]
+    },
+    {
+      "id": "place-sumav:green:1:70224",
+      "stationId": "place-sumav",
+      "station": "Summit Avenue",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70224"
+      ]
+    },
+    {
+      "id": "place-sthld:green:0:70117",
+      "stationId": "place-sthld",
+      "station": "Sutherland Road",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70117"
+      ]
+    },
+    {
+      "id": "place-sthld:green:1:70116",
+      "stationId": "place-sthld",
+      "station": "Sutherland Road",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70116"
+      ]
+    },
+    {
+      "id": "place-symcl:green:0:70241",
+      "stationId": "place-symcl",
+      "station": "Symphony",
+      "line": "green",
+      "direction": "Heath Street",
+      "directionId": 0,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70241"
+      ]
+    },
+    {
+      "id": "place-symcl:green:1:70242",
+      "stationId": "place-symcl",
+      "station": "Symphony",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-E"
+      ],
+      "stopIds": [
+        "70242"
+      ]
+    },
+    {
+      "id": "place-tapst:green:0:70231",
+      "stationId": "place-tapst",
+      "station": "Tappan Street",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70231"
+      ]
+    },
+    {
+      "id": "place-tapst:green:1:70232",
+      "stationId": "place-tapst",
+      "station": "Tappan Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70232"
+      ]
+    },
+    {
+      "id": "place-tumnl:orange:0:70016",
+      "stationId": "place-tumnl",
+      "station": "Tufts Medical Center",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70016"
+      ]
+    },
+    {
+      "id": "place-tumnl:orange:1:70017",
+      "stationId": "place-tumnl",
+      "station": "Tufts Medical Center",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70017"
+      ]
+    },
+    {
+      "id": "place-unsqu:green:0:70504",
+      "stationId": "place-unsqu",
+      "station": "Union Square",
+      "line": "green",
+      "direction": "Copley & West",
+      "directionId": 0,
+      "routes": [
+        "Green-D",
+        "Green-E"
+      ],
+      "stopIds": [
+        "70504"
+      ]
+    },
+    {
+      "id": "place-unsqu:green:1:70503",
+      "stationId": "place-unsqu",
+      "station": "Union Square",
+      "line": "green",
+      "direction": "Arrivals at Union Square",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70503"
+      ]
+    },
+    {
+      "id": "place-valrd:mattapan:0:70271",
+      "stationId": "place-valrd",
+      "station": "Valley Road",
+      "line": "mattapan",
+      "direction": "Mattapan",
+      "directionId": 0,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70271"
+      ]
+    },
+    {
+      "id": "place-valrd:mattapan:1:70272",
+      "stationId": "place-valrd",
+      "station": "Valley Road",
+      "line": "mattapan",
+      "direction": "Ashmont",
+      "directionId": 1,
+      "routes": [
+        "Mattapan"
+      ],
+      "stopIds": [
+        "70272"
+      ]
+    },
+    {
+      "id": "place-waban:green:0:70165",
+      "stationId": "place-waban",
+      "station": "Waban",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70165"
+      ]
+    },
+    {
+      "id": "place-waban:green:1:70164",
+      "stationId": "place-waban",
+      "station": "Waban",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70164"
+      ]
+    },
+    {
+      "id": "place-wrnst:green:0:70125",
+      "stationId": "place-wrnst",
+      "station": "Warren Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70125"
+      ]
+    },
+    {
+      "id": "place-wrnst:green:1:70124",
+      "stationId": "place-wrnst",
+      "station": "Warren Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70124"
+      ]
+    },
+    {
+      "id": "place-bcnwa:green:0:70229",
+      "stationId": "place-bcnwa",
+      "station": "Washington Square",
+      "line": "green",
+      "direction": "Cleveland Circle",
+      "directionId": 0,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70229"
+      ]
+    },
+    {
+      "id": "place-bcnwa:green:1:70230",
+      "stationId": "place-bcnwa",
+      "station": "Washington Square",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-C"
+      ],
+      "stopIds": [
+        "70230"
+      ]
+    },
+    {
+      "id": "place-wascm:green:0:70121",
+      "stationId": "place-wascm",
+      "station": "Washington Street",
+      "line": "green",
+      "direction": "Boston College",
+      "directionId": 0,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70121"
+      ]
+    },
+    {
+      "id": "place-wascm:green:1:70120",
+      "stationId": "place-wascm",
+      "station": "Washington Street",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-B"
+      ],
+      "stopIds": [
+        "70120"
+      ]
+    },
+    {
+      "id": "place-welln:orange:0:70032",
+      "stationId": "place-welln",
+      "station": "Wellington",
+      "line": "orange",
+      "direction": "Forest Hills",
+      "directionId": 0,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70032"
+      ]
+    },
+    {
+      "id": "place-welln:orange:1:70033",
+      "stationId": "place-welln",
+      "station": "Wellington",
+      "line": "orange",
+      "direction": "Oak Grove",
+      "directionId": 1,
+      "routes": [
+        "Orange"
+      ],
+      "stopIds": [
+        "70033"
+      ]
+    },
+    {
+      "id": "place-wlsta:red:0:70099",
+      "stationId": "place-wlsta",
+      "station": "Wollaston",
+      "line": "red",
+      "direction": "Braintree",
+      "directionId": 0,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70099"
+      ]
+    },
+    {
+      "id": "place-wlsta:red:1:70100",
+      "stationId": "place-wlsta",
+      "station": "Wollaston",
+      "line": "red",
+      "direction": "Alewife",
+      "directionId": 1,
+      "routes": [
+        "Red"
+      ],
+      "stopIds": [
+        "70100"
+      ]
+    },
+    {
+      "id": "place-wondl:blue:0:70059",
+      "stationId": "place-wondl",
+      "station": "Wonderland",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70059"
+      ]
+    },
+    {
+      "id": "place-wondl:blue:1:70060",
+      "stationId": "place-wondl",
+      "station": "Wonderland",
+      "line": "blue",
+      "direction": "Arrivals at Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70060"
+      ]
+    },
+    {
+      "id": "place-wimnl:blue:0:70049",
+      "stationId": "place-wimnl",
+      "station": "Wood Island",
+      "line": "blue",
+      "direction": "Bowdoin",
+      "directionId": 0,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70049"
+      ]
+    },
+    {
+      "id": "place-wimnl:blue:1:70050",
+      "stationId": "place-wimnl",
+      "station": "Wood Island",
+      "line": "blue",
+      "direction": "Wonderland",
+      "directionId": 1,
+      "routes": [
+        "Blue"
+      ],
+      "stopIds": [
+        "70050"
+      ]
+    },
+    {
+      "id": "place-woodl:green:0:70163",
+      "stationId": "place-woodl",
+      "station": "Woodland",
+      "line": "green",
+      "direction": "Riverside",
+      "directionId": 0,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70163"
+      ]
+    },
+    {
+      "id": "place-woodl:green:1:70162",
+      "stationId": "place-woodl",
+      "station": "Woodland",
+      "line": "green",
+      "direction": "Park Street & North",
+      "directionId": 1,
+      "routes": [
+        "Green-D"
+      ],
+      "stopIds": [
+        "70162"
+      ]
+    }
+  ]
+}

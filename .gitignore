@@ -1,0 +1,24 @@
+# Dependencies and local credentials
+node_modules/
+.env
+.env.*
+!.env.example
+.npmrc
+
+# Game databases and generated files
+backend/data/
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.log
+__pycache__/
+
+# Xcode and macOS
+DerivedData/
+*.xcresult/
+xcuserdata/
+*.xcuserstate
+.DS_Store

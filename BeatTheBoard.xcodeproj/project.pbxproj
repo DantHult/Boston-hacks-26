@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A20000000000000000000001 /* BeatTheBoardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* BeatTheBoardApp.swift */; };
+		A20000000000000000000002 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* APIClient.swift */; };
+		A20000000000000000000003 /* GuestKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* GuestKeychain.swift */; };
+		A20000000000000000000004 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* GameModel.swift */; };
+		A20000000000000000000005 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000005 /* GameView.swift */; };
+		A20000000000000000000006 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* ServerSettingsView.swift */; };
+		A20000000000000000000007 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000007 /* Assets.xcassets */; };
+		A20000000000000000000008 /* StationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* StationPickerView.swift */; };
+		A20000000000000000000009 /* RoundPresentationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000B /* RoundPresentationView.swift */; };
+		A2000000000000000000000A /* GameActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000C /* GameActivityView.swift */; };
+		A2000000000000000000000B /* BeatTheBoardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000D /* BeatTheBoardUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A80000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50000000000000000000002 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50000000000000000000001;
+			remoteInfo = BeatTheBoard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A10000000000000000000001 /* BeatTheBoardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTheBoardApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000002 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		A10000000000000000000003 /* GuestKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestKeychain.swift; sourceTree = "<group>"; };
+		A10000000000000000000004 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		A10000000000000000000005 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		A10000000000000000000006 /* ServerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettingsView.swift; sourceTree = "<group>"; };
+		A10000000000000000000007 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000000000000000000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000009 /* BeatTheBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeatTheBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000000000000000000000A /* StationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000B /* RoundPresentationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundPresentationView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000C /* GameActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameActivityView.swift; sourceTree = "<group>"; };
+		A1000000000000000000000D /* BeatTheBoardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTheBoardUITests.swift; sourceTree = "<group>"; };
+		A1000000000000000000000E /* BeatTheBoardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeatTheBoardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40000000000000000000005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A30000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000002 /* BeatTheBoard */,
+				A30000000000000000000004 /* BeatTheBoardUITests */,
+				A30000000000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A30000000000000000000002 /* BeatTheBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000001 /* BeatTheBoardApp.swift */,
+				A10000000000000000000002 /* APIClient.swift */,
+				A10000000000000000000003 /* GuestKeychain.swift */,
+				A10000000000000000000004 /* GameModel.swift */,
+				A10000000000000000000005 /* GameView.swift */,
+				A1000000000000000000000B /* RoundPresentationView.swift */,
+				A1000000000000000000000C /* GameActivityView.swift */,
+				A10000000000000000000006 /* ServerSettingsView.swift */,
+				A1000000000000000000000A /* StationPickerView.swift */,
+				A10000000000000000000007 /* Assets.xcassets */,
+				A10000000000000000000008 /* Info.plist */,
+			);
+			path = BeatTheBoard;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000009 /* BeatTheBoard.app */,
+				A1000000000000000000000E /* BeatTheBoardUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A30000000000000000000004 /* BeatTheBoardUITests */ = {
+			isa = PBXGroup;
+			children = (A1000000000000000000000D /* BeatTheBoardUITests.swift */);
+			path = BeatTheBoardUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000000000000000000001 /* BeatTheBoard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A60000000000000000000002 /* Build configuration list for PBXNativeTarget "BeatTheBoard" */;
+			buildPhases = (
+				A40000000000000000000001 /* Sources */,
+				A40000000000000000000002 /* Frameworks */,
+				A40000000000000000000003 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = BeatTheBoard;
+			productName = BeatTheBoard;
+			productReference = A10000000000000000000009 /* BeatTheBoard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A50000000000000000000003 /* BeatTheBoardUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A60000000000000000000003 /* Build configuration list for PBXNativeTarget "BeatTheBoardUITests" */;
+			buildPhases = (
+				A40000000000000000000004 /* Sources */,
+				A40000000000000000000005 /* Frameworks */,
+				A40000000000000000000006 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = (A80000000000000000000002 /* PBXTargetDependency */);
+			name = BeatTheBoardUITests;
+			productName = BeatTheBoardUITests;
+			productReference = A1000000000000000000000E /* BeatTheBoardUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A50000000000000000000002 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					A50000000000000000000001 = {CreatedOnToolsVersion = 16.0; };
+					A50000000000000000000003 = {CreatedOnToolsVersion = 16.0; TestTargetID = A50000000000000000000001; };
+				};
+			};
+			buildConfigurationList = A60000000000000000000001 /* Build configuration list for PBXProject "BeatTheBoard" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = A30000000000000000000001;
+			productRefGroup = A30000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50000000000000000000001 /* BeatTheBoard */,
+				A50000000000000000000003 /* BeatTheBoardUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A40000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (A20000000000000000000007 /* Assets.xcassets in Resources */);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40000000000000000000006 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A40000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000001 /* BeatTheBoardApp.swift in Sources */,
+				A20000000000000000000002 /* APIClient.swift in Sources */,
+				A20000000000000000000003 /* GuestKeychain.swift in Sources */,
+				A20000000000000000000004 /* GameModel.swift in Sources */,
+				A20000000000000000000005 /* GameView.swift in Sources */,
+				A20000000000000000000006 /* ServerSettingsView.swift in Sources */,
+				A20000000000000000000008 /* StationPickerView.swift in Sources */,
+				A20000000000000000000009 /* RoundPresentationView.swift in Sources */,
+				A2000000000000000000000A /* GameActivityView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (A2000000000000000000000B /* BeatTheBoardUITests.swift in Sources */);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A80000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50000000000000000000001 /* BeatTheBoard */;
+			targetProxy = A80000000000000000000001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A70000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A70000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A70000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BeatTheBoard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.beattheboard.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		A70000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BeatTheBoard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.beattheboard.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A70000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.beattheboard.ios.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = iphonesimulator;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = BeatTheBoard;
+			};
+			name = Debug;
+		};
+		A70000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.beattheboard.ios.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = iphonesimulator;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = BeatTheBoard;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A60000000000000000000001 /* Build configuration list for PBXProject "BeatTheBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A70000000000000000000001 /* Debug */, A70000000000000000000002 /* Release */);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A60000000000000000000002 /* Build configuration list for PBXNativeTarget "BeatTheBoard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A70000000000000000000003 /* Debug */, A70000000000000000000004 /* Release */);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A60000000000000000000003 /* Build configuration list for PBXNativeTarget "BeatTheBoardUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A70000000000000000000005 /* Debug */,
+				A70000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A50000000000000000000002 /* Project object */;
+}
