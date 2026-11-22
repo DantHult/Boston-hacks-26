@@ -41,7 +41,8 @@
       ],
       "stopIds": [
         "70061"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-alfcl:red:1:70061",
@@ -215,7 +216,8 @@
       ],
       "stopIds": [
         "70261"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-asmnl:mattapan:1:70261",
@@ -257,7 +259,8 @@
       ],
       "stopIds": [
         "70094"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-astao:orange:0:70278",
@@ -513,7 +516,8 @@
       ],
       "stopIds": [
         "70106"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-bucen:green:0:70145",
@@ -597,7 +601,8 @@
       ],
       "stopIds": [
         "70038"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-boyls:green:0:70159",
@@ -659,7 +664,8 @@
       ],
       "stopIds": [
         "70105"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-bndhl:green:0:70225",
@@ -1107,7 +1113,8 @@
       ],
       "stopIds": [
         "70238"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-ccmnl:orange:0:70028",
@@ -1537,7 +1544,8 @@
       ],
       "stopIds": [
         "70001"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-gilmn:green:0:70506",
@@ -1861,7 +1869,8 @@
       ],
       "stopIds": [
         "70260"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-hymnl:green:0:70153",
@@ -2297,7 +2306,8 @@
       ],
       "stopIds": [
         "70276"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-mvbcl:blue:0:70045",
@@ -2341,7 +2351,8 @@
       ],
       "stopIds": [
         "70512"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-mdftf:green:1:70511",
@@ -2629,7 +2640,8 @@
       ],
       "stopIds": [
         "70036"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-ogmnl:orange:1:70036",
@@ -2996,7 +3008,8 @@
       ],
       "stopIds": [
         "70160"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-rvrwy:green:0:70255",
@@ -3577,7 +3590,8 @@
       ],
       "stopIds": [
         "70504"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-unsqu:green:1:70503",
@@ -3801,7 +3815,8 @@
       ],
       "stopIds": [
         "70059"
-      ]
+      ],
+      "supportsArrivalRounds": false
     },
     {
       "id": "place-wondl:blue:1:70060",

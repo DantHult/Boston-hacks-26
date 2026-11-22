@@ -36,6 +36,13 @@ def build_catalog(archive):
         row['trip_id']: (row['route_id'], int(row['direction_id']))
         for row in records(archive, 'trips') if row['route_id'] in LINES
     }
+    first_sequences = {}
+    for row in records(archive, 'stop_times'):
+        trip_id = row['trip_id']
+        if trip_id in trips:
+            sequence = int(row['stop_sequence'])
+            first_sequences[trip_id] = min(first_sequences.get(trip_id, sequence), sequence)
+
     platforms = {}
     for row in records(archive, 'stop_times'):
         trip = trips.get(row['trip_id'])
@@ -45,9 +52,10 @@ def build_catalog(archive):
         stop_id = row['stop_id']
         station_id = stops[stop_id]['parent_station'] or stop_id
         key = (station_id, LINES[route], direction_id, stop_id)
-        platform = platforms.setdefault(key, {'routes': set(), 'can_board': False})
+        platform = platforms.setdefault(key, {'routes': set(), 'can_board': False, 'can_arrive': False})
         platform['routes'].add(route)
         platform['can_board'] |= row['pickup_type'] != '1'
+        platform['can_arrive'] |= int(row['stop_sequence']) > first_sequences[row['trip_id']]
 
     entries = []
     for key, platform in platforms.items():
@@ -71,6 +79,8 @@ def build_catalog(archive):
             'routes': route_ids,
             'stopIds': [stop_id],
         })
+        if not platform['can_arrive']:
+            entries[-1]['supportsArrivalRounds'] = False
 
     entries.sort(key=lambda row: (row['station'].casefold(), row['stationId'], row['line'], row['directionId'], row['id']))
     feed = next(records(archive, 'feed_info'))

@@ -39,9 +39,10 @@ struct Platform: Decodable, Identifiable, Equatable, Sendable {
     let line: TransitLine
     let direction: String
     let routes: [String]?
+    let supportsArrivalRounds: Bool?
 
     private enum CodingKeys: String, CodingKey {
-        case id, station, line, direction, routes
+        case id, station, line, direction, routes, supportsArrivalRounds
         case stationID = "stationId"
     }
 }
@@ -77,11 +78,13 @@ enum Outcome: String, Decodable, Sendable {
 
 enum VoidReason: String, Decodable, Sendable {
     case canceled
+    case skipped
     case unconfirmed
 
     var message: String {
         switch self {
         case .canceled: "The trip was canceled."
+        case .skipped: "The train skipped this stop."
         case .unconfirmed: "The train’s arrival could not be confirmed."
         }
     }
@@ -129,6 +132,18 @@ struct CurrentState: Decodable, Sendable {
     let lastResult: TransitRound?
     let recentWaitsMs: [Int64]?
     let wallet: Wallet?
+    let liveFeed: LiveFeed?
+}
+
+struct LiveFeed: Decodable, Sendable {
+    enum Availability: String, Decodable, Sendable {
+        case available
+        case unavailable
+        case loading
+    }
+
+    let predictions: Availability
+    let arrivals: Availability
 }
 
 struct PickResponse: Decodable, Sendable {

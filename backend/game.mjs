@@ -8,6 +8,7 @@ const VOTE_WINDOW_MS = OPENING_ESTIMATE_MS - MINUTE_MS;
 const TIE_MARGIN_MS = 30_000;
 const ARRIVAL_TIMEOUT_MS = 15 * MINUTE_MS;
 const DEMO_COOLDOWN_MS = MINUTE_MS;
+const LIVE_RESULT_WINDOW_MS = 120_000;
 const LIVE_VIEWER_WINDOW_MS = 30_000;
 const TRIP_REUSE_WINDOW_MS = 12 * 60 * MINUTE_MS;
 const POLL_INTERVAL_MS = { demo: 250, live: 5_000 };
@@ -106,6 +107,7 @@ function databaseAt(path) {
       arrived_at_ms INTEGER,
       outcome TEXT CHECK (outcome IN ('sooner', 'later', 'board')),
       void_reason TEXT CHECK (void_reason IN ('canceled', 'unconfirmed')),
+      stop_skipped INTEGER NOT NULL DEFAULT 0 CHECK (stop_skipped IN (0, 1)),
       finished_at_real_ms INTEGER,
       CHECK (
         (finished_at_real_ms IS NULL AND outcome IS NULL AND void_reason IS NULL AND arrived_at_ms IS NULL)
@@ -141,6 +143,10 @@ function databaseAt(path) {
     if (!database.prepare("SELECT 1 FROM pragma_table_info('picks') WHERE name = 'wager_credits'").get()) {
       database.exec(`ALTER TABLE picks ADD COLUMN wager_credits INTEGER CHECK (wager_credits BETWEEN 1 AND ${MAX_WAGER_UNITS})`);
     }
+    if (!database.prepare("SELECT 1 FROM pragma_table_info('rounds') WHERE name = 'stop_skipped'").get()) {
+      // Retain the existing void reason constraint on already-deployed databases.
+      database.exec('ALTER TABLE rounds ADD COLUMN stop_skipped INTEGER NOT NULL DEFAULT 0 CHECK (stop_skipped IN (0, 1))');
+    }
   });
   return database;
 }
@@ -151,6 +157,8 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
   const demoEpochMs = db.prepare('SELECT value FROM settings WHERE key = ?').get('demo_epoch_ms').value;
   const transit = { demo: demoTransit, live: liveTransit };
   const watchedPlatforms = new Map();
+  // MBTA vehicle observations are shared across all live platforms.
+  let liveArrivals = 'loading';
   let timer;
 
   const activeRound = db.prepare(`
@@ -189,7 +197,7 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
   `);
   const updateRawArrival = db.prepare('UPDATE rounds SET latest_raw_arrival_at_ms = ? WHERE id = ?');
   const settleRound = db.prepare('UPDATE rounds SET arrived_at_ms = ?, outcome = ?, finished_at_real_ms = ? WHERE id = ?');
-  const voidRound = db.prepare('UPDATE rounds SET void_reason = ?, finished_at_real_ms = ? WHERE id = ?');
+  const voidRound = db.prepare('UPDATE rounds SET void_reason = ?, stop_skipped = ?, finished_at_real_ms = ? WHERE id = ?');
   const insertPick = db.prepare(`
     INSERT INTO picks (round_id, guest_id, choice, picked_at_ms, wager_credits) VALUES (?, ?, ?, ?, ?)
   `);
@@ -267,7 +275,7 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
       openingEstimateMs: round.target_at_ms - round.opened_at_ms,
       actualWaitMs: round.arrived_at_ms === null ? null : round.arrived_at_ms - round.opened_at_ms,
       outcome: round.outcome,
-      voidReason: round.void_reason,
+      voidReason: round.stop_skipped ? 'skipped' : round.void_reason,
       pick: pick?.choice ?? null,
       wagerCredits: pick?.wager_credits == null ? null : pick.wager_credits * CREDITS_PER_UNIT,
       creditChange: pick?.unit_change == null ? null : pick.unit_change * CREDITS_PER_UNIT,
@@ -276,13 +284,17 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
     };
   }
 
-  function updateRound(round, { predictions, arrivals, canceledTripIds }, realNowMs, nowMs) {
+  function updateRound(round, { predictions, arrivals, canceledTripIds, skippedTripIds = [] }, realNowMs, nowMs) {
     const prediction = predictions.find(({ tripId }) => tripId === round.trip_id);
     if (Number.isSafeInteger(prediction?.arrivalAtMs)) {
       updateRawArrival.run(prediction.arrivalAtMs, round.id);
     }
     if (canceledTripIds.includes(round.trip_id)) {
-      voidRound.run('canceled', realNowMs, round.id);
+      voidRound.run('canceled', 0, realNowMs, round.id);
+      return;
+    }
+    if (skippedTripIds.includes(round.trip_id)) {
+      voidRound.run('unconfirmed', 1, realNowMs, round.id);
       return;
     }
 
@@ -295,14 +307,15 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
     if (arrivedAtMs !== Infinity) {
       settleRound.run(arrivedAtMs, outcomeFor(arrivedAtMs - round.target_at_ms), realNowMs, round.id);
     } else if (nowMs >= timeoutAtMs) {
-      voidRound.run('unconfirmed', realNowMs, round.id);
+      voidRound.run('unconfirmed', 0, realNowMs, round.id);
     }
   }
 
-  function openRound(mode, platformId, id, { predictions, arrivals, canceledTripIds }, nowMs) {
+  function openRound(mode, platformId, id, { predictions, arrivals, canceledTripIds, skippedTripIds = [] }, nowMs) {
     const next = predictions.find(prediction =>
       Number.isSafeInteger(prediction.arrivalAtMs) && prediction.arrivalAtMs > nowMs &&
       !canceledTripIds.includes(prediction.tripId) &&
+      !skippedTripIds.includes(prediction.tripId) &&
       !arrivals.some(arrival => arrival.tripId === prediction.tripId && arrival.arrivedAtMs <= nowMs)
     );
     if (!next) return;
@@ -320,7 +333,8 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
     return finishedAt != null && realNowMs < finishedAt + DEMO_COOLDOWN_MS;
   }
 
-  async function observe(mode, platformId, before, observedAtRealMs) {
+  async function observe(state, before, observedAtRealMs) {
+    const { mode, platformId } = state;
     const roundId = before?.id ?? randomUUID();
     const observedAtMs = clock(mode, observedAtRealMs).nowMs;
     let observation = { predictions: [], arrivals: [], canceledTripIds: [] };
@@ -331,17 +345,28 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
         watchedTripId: before?.trip_id ?? null,
         demoRunId: roundId
       });
+      if (mode === 'live') {
+        state.livePredictions = observation.liveFeed?.predictions ?? 'available';
+        liveArrivals = observation.liveFeed?.arrivals ?? 'available';
+      }
     } catch (error) {
+      if (mode === 'live') {
+        state.livePredictions = 'unavailable';
+        liveArrivals = 'unavailable';
+      }
       logger.warn(`Transit observation for ${mode}/${platformId} failed: ${error.message}`);
     }
 
     const realNowMs = now();
     const nowMs = clock(mode, realNowMs).nowMs;
+    const platform = platformById.get(platformId);
+    const canOpen = platform && (mode === 'demo' || (platform.supportsArrivalRounds !== false &&
+      state.livePredictions === 'available' && liveArrivals === 'available'));
     transaction(db, () => {
       const current = activeRound.get(mode, platformId);
       if (current?.id !== before?.id) return;
       if (current) updateRound(current, observation, realNowMs, nowMs);
-      else if (!coolingDown(mode, platformId, realNowMs)) {
+      else if (canOpen && !coolingDown(mode, platformId, realNowMs)) {
         openRound(mode, platformId, roundId, observation, mode === 'demo' ? observedAtMs : nowMs);
       }
     });
@@ -351,7 +376,7 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
     const key = `${mode}/${platformId}`;
     if (!watchedPlatforms.has(key)) {
       watchedPlatforms.set(key, {
-        key, mode, platformId, liveViewerUntilMs: -Infinity, nextAtMs: -Infinity, task: null
+        key, mode, platformId, livePredictions: 'loading', liveViewerUntilMs: -Infinity, nextAtMs: -Infinity, task: null
       });
     }
     return watchedPlatforms.get(key);
@@ -370,7 +395,7 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
     if (!before && coolingDown(mode, platformId, realNowMs)) return Promise.resolve();
 
     state.nextAtMs = realNowMs + POLL_INTERVAL_MS[mode];
-    state.task = observe(mode, platformId, before, realNowMs).finally(() => { state.task = null; });
+    state.task = observe(state, before, realNowMs).finally(() => { state.task = null; });
     return state.task;
   }
 
@@ -406,16 +431,21 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
       const state = watch(mode, platformId);
       if (mode === 'live') state.liveViewerUntilMs = now() + LIVE_VIEWER_WINDOW_MS;
       await refresh(state, true);
-      const currentClock = clock(mode);
+      const realNowMs = now();
+      const currentClock = clock(mode, realNowMs);
       return transaction(db, () => {
-        const current = newestRound.get(mode, platformId);
+        const newest = newestRound.get(mode, platformId);
+        const expired = mode === 'live' && newest?.finished_at_real_ms != null &&
+          realNowMs >= newest.finished_at_real_ms + LIVE_RESULT_WINDOW_MS;
+        const current = expired ? null : newest;
         const lastResult = newestRiderResult.get(mode, platformId, guestId);
         return {
           clock: currentClock,
           round: present(current, guestId, currentClock.nowMs),
           lastResult: current?.id === lastResult?.id ? null : present(lastResult, guestId, currentClock.nowMs),
           recentWaitsMs: recentWaits.all(mode, platformId).map(row => row.wait_ms),
-          wallet: walletFor(mode, guestId)
+          wallet: walletFor(mode, guestId),
+          ...(mode === 'live' && { liveFeed: { predictions: state.livePredictions, arrivals: liveArrivals } })
         };
       }, 'DEFERRED');
     },
@@ -448,6 +478,9 @@ export function createGame({ databasePath, demoTransit, liveTransit, now = Date.
           if (before.finished_at_real_ms !== null || round.void_reason || receivedAtMs >= round.vote_closes_at_ms ||
             (round.arrived_at_ms !== null && receivedAtMs >= round.arrived_at_ms)) {
             throw new ApiError(409, 'voting_closed', 'Voting is closed for this round.');
+          }
+          if (round.mode === 'live' && liveArrivals !== 'available') {
+            throw new ApiError(503, 'arrival_feed_unavailable', 'MBTA arrival tracking is unavailable. Please try again when it returns.');
           }
           if (wagerCredits > walletFor(round.mode, guestId).balance) {
             throw new ApiError(409, 'insufficient_credits', 'Your wallet does not have enough credits for this wager.');

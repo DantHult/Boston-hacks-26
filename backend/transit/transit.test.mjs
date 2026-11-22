@@ -53,6 +53,9 @@ test('live polls share requests and match direction, route, stop, trip and statu
       predicted('skipped-north', '70077', { direction_id: 1 }),
       predicted('wrong-stop', '70078'),
       predicted('cancelled-red', '70077', { schedule_relationship: 'CANCELLED', arrival_time: null }),
+      predicted('skipped-red', '70077'),
+      predicted('skipped-red', '70077', { schedule_relationship: 'SKIPPED', arrival_time: null }),
+      predicted('wrong-platform-skip', '70078', { schedule_relationship: 'SKIPPED', arrival_time: null }),
       predicted('next-orange', '70020', {}, 'Orange')
     ],
     '/vehicles': [
@@ -82,12 +85,16 @@ test('live polls share requests and match direction, route, stop, trip and statu
   assert.deepEqual(red, {
     predictions: [{ tripId: 'next-red', arrivalAtMs: start + 220_000 }],
     arrivals: [{ tripId: 'watched', arrivedAtMs: start + 4000 }],
-    canceledTripIds: ['cancelled-red']
+    canceledTripIds: ['cancelled-red'],
+    skippedTripIds: ['skipped-red'],
+    liveFeed: { predictions: 'available', arrivals: 'available' }
   });
   assert.deepEqual(orange, {
     predictions: [{ tripId: 'next-orange', arrivalAtMs: start + 220_000 }],
     arrivals: [{ tripId: 'orange-arrival', arrivedAtMs: start + 4000 }],
-    canceledTripIds: []
+    canceledTripIds: [],
+    skippedTripIds: [],
+    liveFeed: { predictions: 'available', arrivals: 'available' }
   });
 });
 
@@ -184,4 +191,63 @@ test('anonymous polling stays within budget and expires idle station watches', a
   assert.deepEqual(predictionFilters.slice(0, 3), [
     'place-dwnxg', `place-dwnxg,${anotherStation.stationId}`, anotherStation.stationId
   ]);
+});
+
+test('live forecast and arrival feeds fail and recover independently', async () => {
+  let nowMs = start + 5000;
+  let failure = '/predictions';
+  const live = createLiveTransit({
+    now: () => nowMs,
+    logger: { warn() {} },
+    fetchImpl: async url => {
+      if (url.pathname === failure) return new Response('', { status: 503 });
+      const data = url.pathname === '/vehicles' ? [stopped('watched', '70077')] : [predicted('next', '70077')];
+      return Response.json({ data });
+    }
+  });
+  const observe = () => live.observe('red-ashmont', { nowMs, watchedTripId: 'watched' });
+  const first = await observe();
+  assert.deepEqual(first.liveFeed, { predictions: 'unavailable', arrivals: 'available' });
+  assert.deepEqual(first.predictions, []);
+  assert.deepEqual(first.arrivals, [{ tripId: 'watched', arrivedAtMs: start + 4000 }]);
+
+  failure = '/vehicles';
+  nowMs += 7500;
+  const second = await observe();
+  assert.deepEqual(second.liveFeed, { predictions: 'available', arrivals: 'unavailable' });
+  assert.deepEqual(second.predictions, [{ tripId: 'next', arrivalAtMs: start + 220_000 }]);
+  assert.deepEqual(second.arrivals, []);
+
+  failure = null;
+  nowMs += 7500;
+  assert.deepEqual((await observe()).liveFeed, { predictions: 'available', arrivals: 'available' });
+});
+
+test('new stations wait for their first forecast batch and stale feeds expire during backoff', async () => {
+  let nowMs = start + 5000;
+  const other = platforms.find(platform => platform.stationId !== 'place-dwnxg');
+  const live = createLiveTransit({
+    now: () => nowMs,
+    logger: { warn() {} },
+    fetchImpl: async url => {
+      if (nowMs >= start + 12_500 && url.pathname === '/predictions') return new Response('', { status: 429 });
+      return Response.json({ data: [stopped('watched', '70077')] });
+    }
+  });
+  await live.observe('red-ashmont', { nowMs });
+  assert.deepEqual((await live.observe(other.id, { nowMs })).liveFeed, { predictions: 'loading', arrivals: 'available' });
+
+  nowMs += 7500;
+  assert.deepEqual((await live.observe('red-ashmont', { nowMs })).liveFeed, { predictions: 'unavailable', arrivals: 'available' });
+  nowMs += 15_000;
+  const stale = await live.observe('red-ashmont', { nowMs });
+  assert.deepEqual(stale.liveFeed, { predictions: 'unavailable', arrivals: 'unavailable' });
+  assert.deepEqual(stale.arrivals, []);
+});
+
+test('the catalog distinguishes departure-only terminal directions from arrival directions', () => {
+  const alewife = platforms.filter(platform => platform.stationId === 'place-alfcl' && platform.line === 'red');
+  assert.equal(alewife.length, 2);
+  assert.equal(alewife.find(platform => platform.id === 'place-alfcl:red:0:70061').supportsArrivalRounds, false);
+  assert.equal(alewife.find(platform => platform.direction === 'Arrivals at Alewife').supportsArrivalRounds, true);
 });

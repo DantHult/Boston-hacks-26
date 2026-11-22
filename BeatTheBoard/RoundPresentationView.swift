@@ -4,20 +4,23 @@ struct RoundPresentationView: View {
     let round: TransitRound
     let nowMs: Int64?
     let legacyWinPoints: Int
+    var isVotingPaused = false
 
     @Environment(\.dynamicTypeSize) private var typeSize
     @ScaledMetric(relativeTo: .largeTitle) private var estimateSize = 56.0
 
     private enum Phase {
-        case open, locked, settled, tied, canceled, unconfirmed, voided
+        case open, paused, locked, settled, tied, canceled, skipped, unconfirmed, voided
 
         var title: String {
             switch self {
             case .open: "Voting open"
+            case .paused: "Voting paused"
             case .locked: "Voting closed"
             case .settled: "Round settled"
             case .tied: "Board tie"
             case .canceled: "Trip canceled"
+            case .skipped: "Stop skipped"
             case .unconfirmed: "Arrival unconfirmed"
             case .voided: "Round voided"
             }
@@ -26,10 +29,12 @@ struct RoundPresentationView: View {
         var symbol: String {
             switch self {
             case .open: "bolt.fill"
+            case .paused: "pause.circle.fill"
             case .locked: "lock.fill"
             case .settled: "checkmark.circle.fill"
             case .tied: "equal.circle.fill"
             case .canceled: "xmark.octagon.fill"
+            case .skipped: "arrow.turn.up.right"
             case .unconfirmed: "questionmark.circle.fill"
             case .voided: "minus.circle.fill"
             }
@@ -40,18 +45,20 @@ struct RoundPresentationView: View {
             case .open: BoardColor.signal
             case .locked, .voided: BoardColor.secondary
             case .settled: BoardColor.mint
-            case .tied, .unconfirmed: BoardColor.warning
-            case .canceled: BoardColor.danger
+            case .paused, .tied, .unconfirmed: BoardColor.warning
+            case .canceled, .skipped: BoardColor.danger
             }
         }
 
         var identifier: String {
             switch self {
             case .open: "round.open"
+            case .paused: "round.paused"
             case .locked: "round.locked"
             case .settled: "round.settled"
             case .tied: "round.tied"
             case .canceled: "round.canceled"
+            case .skipped: "round.skipped"
             case .unconfirmed: "round.unconfirmed"
             case .voided: "round.voided"
             }
@@ -60,12 +67,15 @@ struct RoundPresentationView: View {
 
     private var phase: Phase {
         switch round.status {
-        case .open: nowMs.map { $0 >= round.voteClosesAtMs } == true ? .locked : .open
+        case .open:
+            if nowMs.map({ $0 >= round.voteClosesAtMs }) == true { .locked }
+            else { isVotingPaused ? .paused : .open }
         case .locked: .locked
         case .settled: round.outcome == .board ? .tied : .settled
         case .void:
             switch round.voidReason {
             case .canceled: .canceled
+            case .skipped: .skipped
             case .unconfirmed: .unconfirmed
             case nil: .voided
             }

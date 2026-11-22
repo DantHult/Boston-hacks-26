@@ -312,7 +312,7 @@ test('migrating a saved pick keeps its original result and scales its point with
   assert.equal((await server.current(token)).round.pointEarned, true);
   await server.close();
 
-  // Keep the stored rider and round while restoring the old picks schema.
+  // Keep the stored rider and round while restoring the older schema.
   const db = new DatabaseSync(databasePath);
   try {
     db.exec(`
@@ -327,6 +327,7 @@ test('migrating a saved pick keeps its original result and scales its point with
       INSERT INTO legacy_picks SELECT round_id, guest_id, choice, picked_at_ms FROM picks;
       DROP TABLE picks;
       ALTER TABLE legacy_picks RENAME TO picks;
+      ALTER TABLE rounds DROP COLUMN stop_skipped;
       PRAGMA user_version = 0;
       COMMIT;
     `);
@@ -381,6 +382,153 @@ test('live polling drops idle platforms while finishing rounds without a viewer'
   await arrivalSeen.promise;
   assert.equal(visits.get(ORANGE), 1);
   assert.equal((await server.current(token, 'live', RED)).round.status, 'settled');
+});
+
+test('live feed health gates new rounds and wagers while leaving saved picks and demo available', async t => {
+  const time = { nowMs: FIRST_TIME_MS };
+  let arrivals = 'loading';
+  const visits = new Map();
+  const liveTransit = {
+    async observe(id) {
+      visits.set(id, (visits.get(id) ?? 0) + 1);
+      return {
+        ...observations([{ tripId: id, arrivalAtMs: time.nowMs + 240_000 }]),
+        liveFeed: { predictions: id === ORANGE ? 'unavailable' : 'available', arrivals }
+      };
+    }
+  };
+  const server = await harness(t, { time, liveTransit });
+  const [rider, second] = await Promise.all([server.guest(), server.guest()]);
+  const initial = await server.current(rider.token, 'live');
+  assert.equal(initial.round, null);
+  assert.deepEqual(initial.liveFeed, { predictions: 'available', arrivals: 'loading' });
+  assert.equal((await server.current(rider.token)).liveFeed, undefined);
+
+  time.nowMs += 5_000;
+  arrivals = 'available';
+  const healthy = await server.current(rider.token, 'live');
+  assert.equal(healthy.round.status, 'open');
+  assert.deepEqual(healthy.liveFeed, { predictions: 'available', arrivals: 'available' });
+  const saved = await server.pick(rider.token, healthy.round.id, 'later');
+  assert.equal(saved.wallet.balance, 90);
+
+  // An outage reported by another platform applies before this station's next poll.
+  arrivals = 'unavailable';
+  const orange = await server.current(second.token, 'live', ORANGE);
+  assert.equal(orange.round, null);
+  assert.deepEqual(orange.liveFeed, { predictions: 'unavailable', arrivals: 'unavailable' });
+  const degraded = await server.current(second.token, 'live', RED);
+  assert.equal(visits.get(RED), 2);
+  assert.equal(degraded.round.id, healthy.round.id);
+  assert.deepEqual(degraded.liveFeed, { predictions: 'available', arrivals: 'unavailable' });
+  const blocked = await server.pick(second.token, healthy.round.id, 'sooner', 503);
+  assert.equal(blocked.error.code, 'arrival_feed_unavailable');
+  assert.equal((await server.current(second.token, 'live')).wallet.balance, 100);
+  assert.deepEqual(await server.pick(rider.token, healthy.round.id, 'later'), saved);
+
+  const demo = await server.current(second.token);
+  assert.equal(demo.round.status, 'open');
+  assert.equal((await server.pick(second.token, demo.round.id, 'sooner')).wallet.balance, 90);
+
+  time.nowMs += 5_000;
+  arrivals = 'available';
+  assert.deepEqual((await server.current(second.token, 'live')).liveFeed,
+    { predictions: 'available', arrivals: 'available' });
+  const differentlyDegraded = await server.current(second.token, 'live', ORANGE);
+  assert.equal(differentlyDegraded.round, null);
+  assert.deepEqual(differentlyDegraded.liveFeed, { predictions: 'unavailable', arrivals: 'available' });
+  assert.equal((await server.pick(second.token, healthy.round.id, 'sooner')).wallet.balance, 90);
+});
+
+test('a live adapter exception reports unavailable feeds and refunds an existing wager on timeout', async t => {
+  const time = { nowMs: FIRST_TIME_MS };
+  let offline = false;
+  const liveTransit = {
+    async observe() {
+      if (offline) throw new Error('test feed failure');
+      return observations([{ tripId: 'before-outage', arrivalAtMs: time.nowMs + 240_000 }]);
+    }
+  };
+  const server = await harness(t, { time, liveTransit });
+  const { token } = await server.guest();
+  const { round } = await server.current(token, 'live');
+  await server.pick(token, round.id, 'later');
+
+  offline = true;
+  time.nowMs = round.targetAtMs + 15 * 60_000;
+  const result = await server.current(token, 'live');
+  assert.deepEqual(result.liveFeed, { predictions: 'unavailable', arrivals: 'unavailable' });
+  assert.equal(result.round.voidReason, 'unconfirmed');
+  assert.equal(result.round.creditChange, 0);
+  assert.equal(result.wallet.balance, 100);
+});
+
+test('finished live results leave the board after two minutes and remain available to the rider', async t => {
+  const time = { nowMs: FIRST_TIME_MS };
+  const tripId = 'expired-result';
+  let fixture = observations([{ tripId, arrivalAtMs: time.nowMs + 240_000 }]);
+  const server = await harness(t, { time, liveTransit: { async observe() { return fixture; } } });
+  const [rider, spectator] = await Promise.all([server.guest(), server.guest()]);
+  const { round } = await server.current(rider.token, 'live');
+  await server.pick(rider.token, round.id, 'later');
+
+  time.nowMs = round.targetAtMs + 70_000;
+  fixture = observations([], [{ tripId, arrivedAtMs: time.nowMs }]);
+  const { round: settled } = await server.current(rider.token, 'live');
+  assert.equal(settled.status, 'settled');
+  fixture = observations();
+
+  time.nowMs += 119_999;
+  assert.deepEqual((await server.current(rider.token, 'live')).round, settled);
+  time.nowMs += 1;
+  const expired = await server.current(rider.token, 'live');
+  assert.equal(expired.round, null);
+  assert.deepEqual(expired.lastResult, settled);
+  assert.deepEqual(expired.recentWaitsMs, [310_000]);
+  assert.equal(expired.wallet.balance, 110);
+  const otherBoard = await server.current(spectator.token, 'live');
+  assert.equal(otherBoard.round, null);
+  assert.equal(otherBoard.lastResult, null);
+});
+
+test('skipped stops prevent new rounds and refund existing wagers across a restart', async t => {
+  const time = { nowMs: FIRST_TIME_MS };
+  const tripId = 'skipped-at-board';
+  const databasePath = await databaseFile(t);
+  let fixture = {
+    ...observations([{ tripId, arrivalAtMs: time.nowMs + 240_000 }]),
+    skippedTripIds: [tripId]
+  };
+  const liveTransit = { async observe() { return fixture; } };
+  const server = await harness(t, { time, databasePath, liveTransit });
+  const [rider, second] = await Promise.all([server.guest(), server.guest()]);
+  assert.equal((await server.current(rider.token, 'live')).round, null);
+
+  time.nowMs += 5_000;
+  fixture = { ...observations([{ tripId, arrivalAtMs: time.nowMs + 240_000 }]), skippedTripIds: ['different-trip'] };
+  const { round } = await server.current(rider.token, 'live');
+  assert.equal(round.status, 'open');
+  assert.equal((await server.pick(rider.token, round.id, 'later', 200, 40)).wallet.balance, 60);
+
+  time.nowMs += 5_000;
+  fixture = {
+    ...observations(), skippedTripIds: [tripId], liveFeed: { predictions: 'available', arrivals: 'unavailable' }
+  };
+  const rejection = await server.pick(second.token, round.id, 'sooner', 409);
+  assert.equal(rejection.error.code, 'voting_closed');
+  const result = await server.current(rider.token, 'live');
+  assert.equal(result.round.status, 'void');
+  assert.equal(result.round.voidReason, 'skipped');
+  assert.equal(result.round.creditChange, 0);
+  assert.equal(result.wallet.balance, 100);
+  await server.close();
+
+  time.nowMs += 120_000;
+  const reopened = await harness(t, { time, databasePath, liveTransit });
+  const saved = await reopened.current(rider.token, 'live');
+  assert.equal(saved.round, null);
+  assert.deepEqual(saved.lastResult, result.round);
+  assert.equal(saved.wallet.balance, 100);
 });
 
 test('background polling settles a saved demo after restart before any phone requests it', { timeout: 5_000 }, async t => {

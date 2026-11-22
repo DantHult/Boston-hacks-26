@@ -8,6 +8,10 @@ final class BeatTheBoardUITests: XCTestCase {
 
     private struct FixtureState: Decodable {
         let pickPosts: Int
+        let guestPosts: Int
+        let currentGets: Int
+        let standingsGets: Int
+        let pendingStandings: Int
     }
 
     override func setUpWithError() throws {
@@ -62,15 +66,107 @@ final class BeatTheBoardUITests: XCTestCase {
         assertText("Won 20 credits", on: "round.payout", in: app)
         assertText("120", on: "home.wallet", in: app)
 
+        try await advance(fixture, to: "expired")
+        requireElement("home.waiting", in: app)
+        XCTAssertFalse(element("round.settled", in: app).exists)
         tapVisible("home.activity", in: app)
         requireElement("activity.sheet", in: app)
         assertText("Red Line", on: "activity.leaderboard", in: app)
+        requireElement("activity.history", in: app)
+        assertText("Won 20 credits", on: "round.payout", in: app)
+        await closeActivity(in: app)
+    }
+
+    @MainActor
+    func testSavedGuestRecoversAfterUnexpectedRejection() async throws {
+        let fixture = try await makeFixture(outcome: "later")
+        let app = launch(fixture)
+        tapVisible("prediction.later", in: app)
+        tapVisible("prediction.lockIn", in: app)
+        assertText("90", on: "home.wallet", in: app)
+        assertText("10 credits", on: "round.savedWager", in: app)
+
+        try await advance(fixture, to: "guest-unavailable")
+        requireElement("home.guestRecovery", in: app)
+        app.terminate()
+        app.launch()
+        requireElement("home.guestRecovery", in: app)
+        let rejectedState = try await fixtureState(fixture)
+        XCTAssertEqual(rejectedState.guestPosts, 1)
+
+        try await advance(fixture, to: "guest-restored")
+        assertText("90", on: "home.wallet", in: app)
+        assertText("10 credits", on: "round.savedWager", in: app)
+        let restoredState = try await fixtureState(fixture)
+        XCTAssertEqual(restoredState.guestPosts, 1)
+    }
+
+    @MainActor
+    func testSlowAndFailedStandingsDoNotBlockBoardUpdates() async throws {
+        let fixture = try await makeFixture(outcome: "later")
+        try await advance(fixture, to: "hold-standings")
+        let app = launch(fixture)
+        requireElement("round.open", in: app)
+        let beforeActivity = try await fixtureState(fixture)
+        XCTAssertEqual(beforeActivity.standingsGets, 0)
+
+        tapVisible("home.activity", in: app)
+        let pending = try await waitForFixture(fixture) { $0.pendingStandings > 0 }
+        let afterRefresh = try await waitForFixture(fixture) { $0.currentGets > pending.currentGets }
+        XCTAssertGreaterThan(afterRefresh.pendingStandings, 0)
+
+        try await advance(fixture, to: "fail-standings")
+        requireElement("activity.standingsUnavailable", in: app)
+        await closeActivity(in: app)
+        XCTAssertFalse(element("home.connectionProblem", in: app).exists)
+        tapVisible("prediction.later", in: app)
+        tapVisible("prediction.lockIn", in: app)
+        assertText("10 credits", on: "round.savedWager", in: app)
+    }
+
+    @MainActor
+    func testArrivalOutagePausesWagersAndSkippedStopRefunds() async throws {
+        let fixture = try await makeFixture(outcome: "skipped")
+        let app = launch(fixture)
+        tapVisible("prediction.later", in: app)
+
+        try await advance(fixture, to: "arrival-outage")
+        requireElement("home.liveArrivalUnavailable", in: app)
+        requireElement("round.paused", in: app)
+        XCTAssertFalse(element("prediction.lockIn", in: app).isEnabled)
+        let outageState = try await fixtureState(fixture)
+        XCTAssertEqual(outageState.pickPosts, 0)
+
+        try await advance(fixture, to: "arrival-restored")
+        requireElement("round.open", in: app)
+        tapVisible("prediction.lockIn", in: app)
+        assertText("90", on: "home.wallet", in: app)
+
+        try await advance(fixture, to: "finished")
+        requireElement("round.skipped", in: app)
+        assertText("Refunded 10 credits", on: "round.payout", in: app)
+        assertText("100", on: "home.wallet", in: app)
+    }
+
+    @MainActor
+    private func closeActivity(in app: XCUIApplication) async {
         tapVisible("activity.done", in: app)
         let dismissed = XCTNSPredicateExpectation(
             predicate: NSPredicate(format: "exists == false"),
             object: element("activity.sheet", in: app)
         )
         await fulfillment(of: [dismissed], timeout: 10)
+    }
+
+    private func waitForFixture(_ fixture: URL, until condition: (FixtureState) -> Bool) async throws -> FixtureState {
+        let deadline = ContinuousClock.now + .seconds(12)
+        var state = try await fixtureState(fixture)
+        while !condition(state) && ContinuousClock.now < deadline {
+            try await Task.sleep(for: .milliseconds(200))
+            state = try await fixtureState(fixture)
+        }
+        XCTAssertTrue(condition(state), "Expected fixture state change")
+        return state
     }
 
     @MainActor

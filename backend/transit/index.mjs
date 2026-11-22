@@ -1,8 +1,8 @@
 import { definitions } from './catalog.mjs';
 
 const platformById = new Map(definitions.map(platform => [platform.id, platform]));
-export const platforms = definitions.map(({ id, stationId, station, line, direction, routes }) => ({
-  id, stationId, station, line, direction, routes
+export const platforms = definitions.map(({ id, stationId, station, line, direction, routes, supportsArrivalRounds = true }) => ({
+  id, stationId, station, line, direction, routes, supportsArrivalRounds
 }));
 
 function platformFor(id) {
@@ -33,6 +33,7 @@ export function createDemoTransit() {
 const baseUrl = 'https://api-v3.mbta.com';
 const railRoutes = [...new Set(definitions.flatMap(platform => platform.routes))].sort().join(',');
 const observationRetentionMs = 15_000;
+const feedFreshnessMs = 15_000;
 
 function relatedId(record, relationship) {
   return record.relationships?.[relationship]?.data?.id;
@@ -67,7 +68,7 @@ export function createLiveTransit({ apiKey, fetchImpl = fetch, now = Date.now, l
   const stationWatches = new Map();
   let nextRequestAtMs = -Infinity;
   let pending;
-  let snapshot = { predictions: new Map(), vehicles: new Map(), trips: new Set() };
+  let snapshot;
 
   async function load(resource, filters = {}) {
     const url = new URL(`/${resource}`, baseUrl);
@@ -90,7 +91,8 @@ export function createLiveTransit({ apiKey, fetchImpl = fetch, now = Date.now, l
     for (const [stationId, observedAtMs] of stationWatches) {
       if (observedAtMs <= expiredAtMs) stationWatches.delete(stationId);
     }
-    const filters = { 'filter[stop]': [...stationWatches.keys()].join(','), include: 'trip' };
+    const stations = new Set(stationWatches.keys());
+    const filters = { 'filter[stop]': [...stations].join(','), include: 'trip' };
     const results = await Promise.allSettled([load('predictions', filters), load('vehicles')]);
     const [predictions, vehicles] = results.map(result => {
       if (result.status === 'fulfilled') return result.value;
@@ -98,6 +100,10 @@ export function createLiveTransit({ apiKey, fetchImpl = fetch, now = Date.now, l
       return { data: [] };
     });
     snapshot = {
+      stations,
+      fetchedAtMs: now(),
+      predictionsAvailable: results[0].status === 'fulfilled',
+      arrivalsAvailable: results[1].status === 'fulfilled',
       predictions: indexByStop(predictions.data),
       vehicles: indexByStop(vehicles.data),
       trips: new Set((predictions.included ?? []).filter(item => item.type === 'trip' && canceled(item.attributes)).map(item => item.id))
@@ -120,20 +126,32 @@ export function createLiveTransit({ apiKey, fetchImpl = fetch, now = Date.now, l
     async observe(platformId, { nowMs, watchedTripId }) {
       const platform = platformFor(platformId);
       const rows = await currentSnapshot(platform.stationId);
+      const fresh = rows && now() - rows.fetchedAtMs < feedFreshnessMs;
+      const liveFeed = {
+        predictions: !fresh || !rows.predictionsAvailable
+          ? 'unavailable'
+          : rows.stations.has(platform.stationId) ? 'available' : 'loading',
+        arrivals: fresh && rows.arrivalsAvailable ? 'available' : 'unavailable'
+      };
       const predictions = [];
       const canceledTripIds = new Set();
-      if (rows.trips.has(watchedTripId)) canceledTripIds.add(watchedTripId);
-      for (const row of platformRows(rows.predictions, platform)) {
+      const skippedTripIds = new Set();
+      const predictionRows = liveFeed.predictions === 'available' ? platformRows(rows.predictions, platform) : [];
+      if (fresh && rows.trips.has(watchedTripId)) canceledTripIds.add(watchedTripId);
+      for (const row of predictionRows) {
         const tripId = relatedId(row, 'trip');
         if (!tripId) continue;
         if (canceled(row.attributes) || rows.trips.has(tripId)) {
           canceledTripIds.add(tripId);
+        } else if (row.attributes.schedule_relationship?.toUpperCase() === 'SKIPPED') {
+          skippedTripIds.add(tripId);
         } else {
           const arrivalAtMs = Date.parse(row.attributes.arrival_time);
           if (arrivalAtMs > nowMs) predictions.push({ tripId, arrivalAtMs });
         }
       }
-      const arrivals = platformRows(rows.vehicles, platform).flatMap(row => {
+      const vehicleRows = liveFeed.arrivals === 'available' ? platformRows(rows.vehicles, platform) : [];
+      const arrivals = vehicleRows.flatMap(row => {
         const tripId = relatedId(row, 'trip');
         const arrivedAtMs = Date.parse(row.attributes.updated_at);
         if (row.attributes.current_status !== 'STOPPED_AT' || !tripId || !Number.isFinite(arrivedAtMs)) return [];
@@ -142,9 +160,11 @@ export function createLiveTransit({ apiKey, fetchImpl = fetch, now = Date.now, l
       });
       predictions.sort((a, b) => a.arrivalAtMs - b.arrivalAtMs);
       return {
-        predictions: predictions.filter(prediction => !canceledTripIds.has(prediction.tripId)),
+        predictions: predictions.filter(({ tripId }) => !canceledTripIds.has(tripId) && !skippedTripIds.has(tripId)),
         arrivals,
-        canceledTripIds: [...canceledTripIds]
+        canceledTripIds: [...canceledTripIds],
+        skippedTripIds: [...skippedTripIds],
+        liveFeed
       };
     }
   };

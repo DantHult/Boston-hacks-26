@@ -17,6 +17,7 @@ struct StationPickerView: View {
 
     let platforms: [Platform]
     let selectedPlatformID: String
+    let mode: GameMode
     let select: (Platform) -> Void
 
     var body: some View {
@@ -30,6 +31,7 @@ struct StationPickerView: View {
                         line: line,
                         platforms: platformsByLine[line, default: []],
                         selectedPlatformID: selectedPlatformID,
+                        mode: mode,
                         select: select
                     )
                 } label: {
@@ -67,10 +69,12 @@ private struct LineStationsView: View {
     private let line: TransitLine
     private let stations: [Station]
     private let selectedPlatformID: String
+    private let mode: GameMode
     private let select: (Platform) -> Void
 
-    init(line: TransitLine, platforms: [Platform], selectedPlatformID: String, select: @escaping (Platform) -> Void) {
+    init(line: TransitLine, platforms: [Platform], selectedPlatformID: String, mode: GameMode, select: @escaping (Platform) -> Void) {
         self.line = line
+        self.mode = mode
         let grouped = Dictionary(grouping: platforms) { $0.stationID ?? $0.station }
         stations = grouped.compactMap { id, platforms in
             guard let first = platforms.first else { return nil }
@@ -119,6 +123,7 @@ private struct LineStationsView: View {
 
     private func directionButton(_ platform: Platform) -> some View {
         let isSelected = platform.id == selectedPlatformID
+        let departuresOnly = mode == .live && platform.supportsArrivalRounds == false
         return Button {
             select(platform)
         } label: {
@@ -130,6 +135,11 @@ private struct LineStationsView: View {
                         Text(platform.serviceTitle)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                    }
+                    if departuresOnly {
+                        Text("Departures only")
+                            .font(.caption.weight(.medium))
+                            .foregroundStyle(BoardColor.warning)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -145,7 +155,7 @@ private struct LineStationsView: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(platform.direction)
-        .accessibilityValue(platform.serviceTitle)
+        .accessibilityValue(departuresOnly ? "\(platform.serviceTitle), departures only" : platform.serviceTitle)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

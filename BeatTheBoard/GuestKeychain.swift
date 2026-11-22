@@ -47,11 +47,4 @@ enum GuestKeychain {
         let addStatus = SecItemAdd(item as CFDictionary, nil)
         guard addStatus == errSecSuccess else { throw Failure(status: addStatus) }
     }
-
-    static func remove(for server: URL) throws {
-        let status = SecItemDelete(query(for: server) as CFDictionary)
-        guard status == errSecSuccess || status == errSecItemNotFound else {
-            throw Failure(status: status)
-        }
-    }
 }

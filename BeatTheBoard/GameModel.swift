@@ -11,6 +11,12 @@ final class GameModel: ObservableObject {
         var platformID: String
     }
 
+    struct StandingsContext: Equatable {
+        let sessionID: UUID
+        let mode: GameMode
+        let line: TransitLine
+    }
+
     private struct ClockReading {
         let clock: ServerClock
         let received = ContinuousClock.now
@@ -30,13 +36,18 @@ final class GameModel: ObservableObject {
     @Published private(set) var lastResult: TransitRound?
     @Published private(set) var recentWaitsMs: [Int64] = []
     @Published private(set) var leaderboard: [LeaderboardEntry]?
+    @Published private(set) var standingsUnavailable = false
     @Published private(set) var wallet: Wallet?
+    @Published private(set) var liveFeed: LiveFeed?
     @Published private(set) var hasReceivedBoard = false
     @Published private(set) var connectionProblem: String?
     @Published private(set) var pickProblem: String?
     @Published private(set) var pendingPick: Pick?
     @Published private(set) var refillProblem: String?
     @Published private(set) var pendingRefill = false
+    @Published private(set) var savedGuestRejected = false
+    @Published private(set) var pendingGuestReplacement = false
+    @Published private(set) var guestReplacementProblem: String?
     @Published private var clock: ClockReading?
 
     private let defaults: UserDefaults
@@ -54,6 +65,16 @@ final class GameModel: ObservableObject {
 
     var platform: Platform? { platforms.first { $0.id == selection.platformID } }
     var nowMs: Int64? { clock?.nowMs }
+    var canPlaceWager: Bool {
+        guard !savedGuestRejected else { return false }
+        guard selection.mode == .live else { return true }
+        return platform?.supportsArrivalRounds != false && (liveFeed.map { $0.arrivals == .available } ?? true)
+    }
+
+    var standingsContext: StandingsContext? {
+        guard !savedGuestRejected, token != nil, let line = platform?.line else { return nil }
+        return StandingsContext(sessionID: sessionID, mode: selection.mode, line: line)
+    }
 
     nonisolated static func serverURL(_ text: String) -> URL? {
         guard var parts = URLComponents(string: text.trimmingCharacters(in: .whitespacesAndNewlines)),
@@ -97,11 +118,20 @@ final class GameModel: ObservableObject {
     private func changeSelection(_ newSelection: Selection) {
         selection = newSelection
         sessionID = UUID()
+        resetBoard()
+        savedGuestRejected = false
+        pendingGuestReplacement = false
+        guestReplacementProblem = nil
+    }
+
+    private func resetBoard() {
         round = nil
         lastResult = nil
         recentWaitsMs = []
         leaderboard = nil
+        standingsUnavailable = false
         wallet = nil
+        liveFeed = nil
         clock = nil
         hasReceivedBoard = false
         connectionProblem = nil
@@ -118,7 +148,7 @@ final class GameModel: ObservableObject {
         while isCurrent(id) {
             await refresh(currentSelection, client: client, session: id)
             do {
-                try await Task.sleep(for: interval)
+                try await Task.sleep(for: savedGuestRejected ? .seconds(2) : interval)
             } catch {
                 return
             }
@@ -126,7 +156,7 @@ final class GameModel: ObservableObject {
     }
 
     private func refresh(_ selection: Selection, client: APIClient, session id: UUID) async {
-        guard pendingPick == nil, !pendingRefill else { return }
+        guard pendingPick == nil, !pendingRefill, !pendingGuestReplacement else { return }
         let revision = roundRevision
         do {
             let credential = try await authenticate(client: client, session: id)
@@ -153,35 +183,76 @@ final class GameModel: ObservableObject {
             lastResult = current.lastResult
             recentWaitsMs = current.recentWaitsMs ?? []
             wallet = current.wallet
+            liveFeed = current.liveFeed
             if current.wallet?.canRefill == false { refillProblem = nil }
             clock = ClockReading(clock: current.clock)
             hasReceivedBoard = true
             connectionProblem = nil
-
-            if let platform {
-                let standings = try await client.leaderboard(mode: selection.mode, line: platform.line, token: credential)
-                guard isCurrent(id), revision == roundRevision else { return }
-                leaderboard = standings
-            }
-        } catch let error as APIError where error.status == 401 {
-            guard isCurrent(id), revision == roundRevision else { return }
-            do {
-                try GuestKeychain.remove(for: selection.server)
-                token = nil
-                nickname = nil
-                round = nil
-                lastResult = nil
-                recentWaitsMs = []
-                leaderboard = nil
-                wallet = nil
-                refillProblem = nil
-                hasReceivedBoard = false
-            } catch {
-                connectionProblem = error.localizedDescription
-            }
+            savedGuestRejected = false
+            guestReplacementProblem = nil
         } catch {
             guard isCurrent(id), revision == roundRevision else { return }
-            connectionProblem = error.localizedDescription
+            if !handleGuestRejection(error) {
+                connectionProblem = error.localizedDescription
+            }
+        }
+    }
+
+    func pollStandings(for context: StandingsContext) async {
+        guard context == standingsContext, let token else { return }
+        let client = APIClient(baseURL: selection.server)
+        while isCurrent(context.sessionID), context == standingsContext {
+            do {
+                let standings = try await client.leaderboard(mode: context.mode, line: context.line, token: token)
+                guard isCurrent(context.sessionID), context == standingsContext else { return }
+                leaderboard = standings
+                standingsUnavailable = false
+            } catch {
+                guard isCurrent(context.sessionID), context == standingsContext else { return }
+                standingsUnavailable = true
+            }
+            do {
+                try await Task.sleep(for: .seconds(5))
+            } catch {
+                return
+            }
+        }
+    }
+
+    private func handleGuestRejection(_ error: Error) -> Bool {
+        guard (error as? APIError)?.status == 401,
+              token != nil || (try? GuestKeychain.read(for: selection.server)) != nil else { return false }
+        if !savedGuestRejected {
+            roundRevision += 1
+            resetBoard()
+            savedGuestRejected = true
+        }
+        return true
+    }
+
+    func replaceSavedGuest() {
+        guard savedGuestRejected, !pendingGuestReplacement else { return }
+        let id = sessionID
+        let client = APIClient(baseURL: selection.server)
+        roundRevision += 1
+        pendingGuestReplacement = true
+        guestReplacementProblem = nil
+
+        Task {
+            defer {
+                if sessionID == id { pendingGuestReplacement = false }
+            }
+            do {
+                let created = try await client.createGuest()
+                guard isCurrent(id) else { return }
+                try GuestKeychain.save(created.token, for: client.baseURL)
+                token = created.token
+                nickname = created.guest.nickname
+                changeSelection(selection)
+            } catch {
+                guard isCurrent(id) else { return }
+                guestReplacementProblem = error.localizedDescription
+            }
         }
     }
 
@@ -207,7 +278,7 @@ final class GameModel: ObservableObject {
     }
 
     func choose(_ choice: Pick, wagerCredits: Int) {
-        guard let round, let token, let nowMs, nowMs < round.voteClosesAtMs,
+        guard canPlaceWager, let round, let token, let nowMs, nowMs < round.voteClosesAtMs,
               let wallet, wagerCredits > 0, wagerCredits <= wallet.maxWagerCredits,
               wagerCredits.isMultiple(of: wallet.creditsPerStep),
               round.status == .open, round.pick == nil, pendingPick == nil, !pendingRefill else { return }
@@ -231,13 +302,15 @@ final class GameModel: ObservableObject {
                 clock = ClockReading(clock: response.clock)
             } catch {
                 guard isCurrent(id) else { return }
-                pickProblem = error.localizedDescription
+                if !handleGuestRejection(error) {
+                    pickProblem = error.localizedDescription
+                }
             }
         }
     }
 
     func refillCredits() {
-        guard let token, wallet?.canRefill == true, pendingPick == nil, !pendingRefill else { return }
+        guard !savedGuestRejected, let token, wallet?.canRefill == true, pendingPick == nil, !pendingRefill else { return }
 
         let id = sessionID
         let client = APIClient(baseURL: selection.server)
@@ -255,7 +328,9 @@ final class GameModel: ObservableObject {
                 wallet = updated
             } catch {
                 guard isCurrent(id) else { return }
-                refillProblem = error.localizedDescription
+                if !handleGuestRejection(error) {
+                    refillProblem = error.localizedDescription
+                }
             }
         }
     }

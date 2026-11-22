@@ -5,6 +5,7 @@ struct GameActivityView: View {
     @ObservedObject var game: GameModel
     let onDone: () -> Void
     @Environment(\.dynamicTypeSize) private var typeSize
+    @Environment(\.scenePhase) private var phase
 
     var body: some View {
         NavigationStack {
@@ -53,6 +54,10 @@ struct GameActivityView: View {
             }
         }
         .tint(BoardColor.signal)
+        .task(id: phase == .active ? game.standingsContext : nil) {
+            guard phase == .active, let context = game.standingsContext else { return }
+            await game.pollStandings(for: context)
+        }
     }
 
     private var riderContext: some View {
@@ -79,6 +84,12 @@ struct GameActivityView: View {
             sectionHeading("\(line.title) leaderboard", symbol: "trophy", id: "activity.leaderboard")
 
             VStack(alignment: .leading, spacing: 10) {
+                if game.standingsUnavailable {
+                    Text("Standings are temporarily unavailable.")
+                        .font(.subheadline)
+                        .foregroundStyle(BoardColor.secondary)
+                        .accessibilityIdentifier("activity.standingsUnavailable")
+                }
                 if let entries = game.leaderboard {
                     if entries.isEmpty {
                         Text("No points yet.")
@@ -91,11 +102,11 @@ struct GameActivityView: View {
                         }
                         leaderboardRow(rank: index + 1, entry: entry)
                     }
-                } else if game.connectionProblem != nil {
-                    Text("Standings are unavailable. Check your connection.")
+                } else if game.savedGuestRejected {
+                    Text("Reconnect to your saved guest to load standings.")
                         .font(.subheadline)
                         .foregroundStyle(BoardColor.secondary)
-                } else {
+                } else if !game.standingsUnavailable {
                     ProgressView("Loading standings")
                 }
             }

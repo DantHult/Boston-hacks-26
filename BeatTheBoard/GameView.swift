@@ -71,6 +71,7 @@ struct GameView: View {
     @Environment(\.scenePhase) private var phase
     @Environment(\.dynamicTypeSize) private var typeSize
     @State private var sheet: HomeSheet?
+    @State private var confirmingGuestReplacement = false
 
     private enum HomeSheet: String, Identifiable {
         case settings, stations, activity
@@ -98,11 +99,16 @@ struct GameView: View {
                         } else {
                             roundArea(round, nowMs: nil)
                         }
-                    } else {
+                    } else if !game.savedGuestRejected, liveStatus == nil {
                         waitingBoard
                     }
+                    if let liveStatus { liveNotice(liveStatus) }
                     walletAction
-                    if game.connectionProblem != nil { connectionNotice }
+                    if game.savedGuestRejected {
+                        guestRecoveryNotice
+                    } else if game.connectionProblem != nil {
+                        connectionNotice
+                    }
                     activityButton
                 }
                 .frame(maxWidth: 540)
@@ -127,13 +133,19 @@ struct GameView: View {
             case .settings:
                 ServerSettingsView(server: game.selection.server, save: game.setServer)
             case .stations:
-                StationPickerView(platforms: game.platforms, selectedPlatformID: game.selection.platformID) { platform in
+                StationPickerView(platforms: game.platforms, selectedPlatformID: game.selection.platformID, mode: game.selection.mode) { platform in
                     game.setPlatform(platform.id)
                     sheet = nil
                 }
             case .activity:
                 GameActivityView(game: game) { sheet = nil }
             }
+        }
+        .confirmationDialog("Replace saved guest?", isPresented: $confirmingGuestReplacement, titleVisibility: .visible) {
+            Button("Replace with new guest", role: .destructive) { game.replaceSavedGuest() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Replacing your saved guest removes this device’s access to that guest’s credits and scores at this server address.")
         }
         .task(id: poll) {
             guard poll.active else { return }
@@ -281,6 +293,7 @@ struct GameView: View {
             if game.hasReceivedBoard {
                 Label("Waiting for a 4-minute estimate", systemImage: "clock")
                     .font(.headline)
+                    .accessibilityIdentifier("home.waiting")
             } else if game.connectionProblem == nil {
                 ProgressView("Connecting to the board")
                     .font(.subheadline)
@@ -290,15 +303,75 @@ struct GameView: View {
         .padding(.vertical, game.connectionProblem == nil ? 12 : 0)
     }
 
+    private struct LiveStatus {
+        let title: String
+        let detail: String
+        let symbol: String
+        let id: String
+    }
+
+    private var liveStatus: LiveStatus? {
+        guard game.selection.mode == .live, !game.savedGuestRejected, game.connectionProblem == nil else { return nil }
+        if game.platform?.supportsArrivalRounds == false {
+            return LiveStatus(
+                title: "Departures only",
+                detail: "Choose an arriving direction or switch to Demo to place a wager here.",
+                symbol: "arrow.up.forward",
+                id: "home.departuresOnly"
+            )
+        }
+        guard let feed = game.liveFeed else { return nil }
+        if feed.arrivals == .unavailable {
+            return LiveStatus(
+                title: "MBTA arrival tracking unavailable",
+                detail: "New live wagers are paused until tracking returns.",
+                symbol: "exclamationmark.circle",
+                id: "home.liveArrivalUnavailable"
+            )
+        }
+        if feed.predictions == .unavailable {
+            return LiveStatus(
+                title: "MBTA estimates unavailable",
+                detail: "The board will check again automatically.",
+                symbol: "exclamationmark.circle",
+                id: "home.livePredictionsUnavailable"
+            )
+        }
+        if feed.arrivals == .loading || feed.predictions == .loading {
+            return LiveStatus(
+                title: "Checking MBTA data",
+                detail: "Waiting for the latest estimates and arrival reports.",
+                symbol: "clock",
+                id: "home.liveLoading"
+            )
+        }
+        return nil
+    }
+
+    private func liveNotice(_ status: LiveStatus) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Label(status.title, systemImage: status.symbol)
+                .font(.headline)
+                .foregroundStyle(BoardColor.warning)
+                .accessibilityIdentifier(status.id)
+            Text(status.detail)
+                .font(.subheadline)
+                .foregroundStyle(BoardColor.secondary)
+        }
+        .boardCard()
+    }
+
     private func roundArea(_ round: TransitRound, nowMs: Int64?) -> some View {
         let canPredict = round.status == .open && round.pick == nil &&
             nowMs.map { $0 < round.voteClosesAtMs } == true
 
         return VStack(spacing: 12) {
-            RoundPresentationView(round: round, nowMs: nowMs, legacyWinPoints: game.wallet?.creditsPerStep ?? 1)
+            RoundPresentationView(round: round, nowMs: nowMs, legacyWinPoints: game.wallet?.creditsPerStep ?? 1,
+                                  isVotingPaused: !game.canPlaceWager)
 
             if canPredict, let wallet = game.wallet, wallet.maxWagerCredits >= wallet.creditsPerStep {
-                PredictionPanel(wallet: wallet, isSaving: game.pendingPick != nil, isRefilling: game.pendingRefill) { pick, credits in
+                PredictionPanel(wallet: wallet, isSaving: game.pendingPick != nil,
+                                isUnavailable: game.pendingRefill || !game.canPlaceWager) { pick, credits in
                     guard game.round?.id == round.id else { return }
                     game.choose(pick, wagerCredits: credits)
                 }
@@ -306,7 +379,7 @@ struct GameView: View {
             } else if game.pendingPick != nil {
                 ProgressView("Locking in prediction")
                     .frame(maxWidth: .infinity, alignment: .leading)
-            } else if canPredict && game.hasReceivedBoard && game.wallet == nil && game.connectionProblem == nil {
+            } else if canPredict && game.canPlaceWager && game.hasReceivedBoard && game.wallet == nil && game.connectionProblem == nil {
                 VStack(alignment: .leading, spacing: 6) {
                     Label("Wagers unavailable", systemImage: "exclamationmark.circle")
                         .font(.headline)
@@ -364,6 +437,7 @@ struct GameView: View {
             Label(game.hasReceivedBoard ? "Connection interrupted" : "Can’t reach the board", systemImage: "wifi.exclamationmark")
                 .font(.headline)
                 .foregroundStyle(BoardColor.warning)
+                .accessibilityIdentifier("home.connectionProblem")
             Text("Check your connection or the server address.")
                 .font(.subheadline)
                 .foregroundStyle(BoardColor.secondary)
@@ -374,6 +448,42 @@ struct GameView: View {
                     .font(.subheadline.weight(.semibold))
                     .frame(minWidth: 44, minHeight: 44, alignment: .leading)
                     .contentShape(Rectangle())
+            }
+        }
+        .boardCard()
+    }
+
+    private var guestRecoveryNotice: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label("Saved guest unavailable", systemImage: "person.crop.circle.badge.exclamationmark")
+                .font(.headline)
+                .foregroundStyle(BoardColor.warning)
+                .accessibilityIdentifier("home.guestRecovery")
+            Text("This server did not recognize your saved guest. Reconnect to the original server to recover your credits and scores.")
+                .font(.subheadline)
+                .foregroundStyle(BoardColor.secondary)
+            Button {
+                sheet = .settings
+            } label: {
+                Text("Server settings")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(minHeight: 44, alignment: .leading)
+                    .contentShape(Rectangle())
+            }
+            Button {
+                confirmingGuestReplacement = true
+            } label: {
+                Text("Start as a new guest")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(minHeight: 44, alignment: .leading)
+                    .contentShape(Rectangle())
+            }
+            .disabled(game.pendingGuestReplacement)
+            .accessibilityIdentifier("home.replaceGuest")
+            if game.pendingGuestReplacement {
+                ProgressView("Creating guest")
+            } else if let problem = game.guestReplacementProblem {
+                Text(problem).font(.footnote).foregroundStyle(BoardColor.warning)
             }
         }
         .boardCard()
@@ -405,7 +515,7 @@ struct GameView: View {
 private struct PredictionPanel: View {
     let wallet: Wallet
     let isSaving: Bool
-    let isRefilling: Bool
+    let isUnavailable: Bool
     let submit: (Pick, Int) -> Void
 
     @Environment(\.dynamicTypeSize) private var typeSize
@@ -413,7 +523,7 @@ private struct PredictionPanel: View {
     @State private var choice: Pick?
     @State private var wagerSteps = 1
 
-    private var isBusy: Bool { isSaving || isRefilling }
+    private var isBusy: Bool { isSaving || isUnavailable }
     private var maxSteps: Int { wallet.maxWagerCredits / wallet.creditsPerStep }
     private var visibleSteps: Int { min(wagerSteps, maxSteps) }
     private var stake: Int { visibleSteps * wallet.creditsPerStep }
